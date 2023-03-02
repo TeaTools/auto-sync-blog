@@ -1,0 +1,40 @@
+name: blog-catch-and-pages
+on:
+  # 设置可以手动执行(参考：https://tongjunsz.gitee.io/2021/03/18/GitHub-Actions-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F/)
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+  # 每天下午四点执行（也就是16点，需要-8小时，所以是8）
+  schedule:
+    - cron: "0 8 * * *"
+
+jobs:
+  blog-catch-and-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codes
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+
+      - name: install and run
+        run: npm install
+      - run: node .\main.js --juejin_user_id=${{ secrets.JUEJIN_USER_ID }} --juejin_column_id=${{ secrets.JUEJIN_COLUMN_ID }}
+
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+      # 查看 workflow 的文档来获取更多信息
+      # @see https://github.com/crazy-max/ghaction-github-pages
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.PRESS_TOKEN_TEA_BLOG }}
+          BRANCH: gh-pages
+          FOLDER: docs/.vuepress/dist
