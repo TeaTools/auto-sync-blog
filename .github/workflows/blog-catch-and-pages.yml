@@ -24,6 +24,7 @@ jobs:
 
       - name: install and run
         run: npm install
+        
       - run: node .\main.js --juejin_user_id=${{ secrets.JUEJIN_USER_ID }} --juejin_column_id=${{ secrets.JUEJIN_COLUMN_ID }}
 
       - name: Install and Build
