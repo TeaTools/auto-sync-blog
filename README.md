@@ -118,13 +118,6 @@ http://localhost:8080/
             <br />
             <sub><b>南方者</b></sub>
         </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/NanFangZhe404">
-            <img src="https://avatars.githubusercontent.com/u/86654383?v=4" width="100;" alt="NanFangZhe404"/>
-            <br />
-            <sub><b>南方者</b></sub>
-        </a>
     </td></tr>
 </table>
 <!-- readme: collaborators,contributors -end -->
