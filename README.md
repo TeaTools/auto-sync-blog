@@ -27,6 +27,7 @@
 
 3. 更新仓库的 actions 权限：Settings -> Secret -> Actions -> General -> Workflow permissions -> 勾选 Read and write permissions -> Save.
 4. 仓库 -> Actions, 检查 Workflows 并启用。
+5. Settings -> Pages -> Branch -> gh-pages （如果不出现 gh-pages 分支，重复第四步并检查是否已经完成。）-> Save 
 
 ### 本地部署流程（Be Developer）
 
@@ -110,25 +111,8 @@ http://localhost:8080/
 ## 贡献者
 
 <!-- readme: collaborators,contributors -start -->
-<table>
-<tr>
-    <td align="center">
-        <a href="https://github.com/tea-blog">
-            <img src="https://avatars.githubusercontent.com/u/68322136?v=4" width="100;" alt="tea-blog"/>
-            <br />
-            <sub><b>南方者</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/NanFangZhe404">
-            <img src="https://avatars.githubusercontent.com/u/86654383?v=4" width="100;" alt="NanFangZhe404"/>
-            <br />
-            <sub><b>南方者</b></sub>
-        </a>
-    </td></tr>
-</table>
 <!-- readme: collaborators,contributors -end -->
-欢迎各位英雄豪杰加入，共建更完美的自动化同步文章平台（auto-sync-blog）。
+欢迎各位英雄豪杰加入，共建更完美的 **自动化同步文章平台（auto-sync-blog）** 。
 
 ## 问题回答（Question & Answer）
 <a title="Q&A" href="Q&A.md">Question & Answer</a>
