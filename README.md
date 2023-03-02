@@ -111,6 +111,23 @@ http://localhost:8080/
 ## 贡献者
 
 <!-- readme: collaborators,contributors -start -->
+<table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/tea-blog">
+            <img src="https://avatars.githubusercontent.com/u/68322136?v=4" width="100;" alt="tea-blog"/>
+            <br />
+            <sub><b>南方者</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/NanFangZhe404">
+            <img src="https://avatars.githubusercontent.com/u/86654383?v=4" width="100;" alt="NanFangZhe404"/>
+            <br />
+            <sub><b>南方者</b></sub>
+        </a>
+    </td></tr>
+</table>
 <!-- readme: collaborators,contributors -end -->
 欢迎各位英雄豪杰加入，共建更完美的 **自动化同步文章平台（auto-sync-blog）** 。
 
