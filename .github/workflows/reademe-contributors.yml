@@ -1,0 +1,19 @@
+# 监听 main 分支（参考来源：https://juejin.cn/post/7085631302484885512）
+on:
+  push:
+    branches:
+      - main
+
+# action 名称
+name: reademe-contributors
+
+jobs:
+  # 任务
+  reademe-contributors-job:
+    runs-on: ubuntu-latest
+    name: A job to automate contrib in readme
+    steps:
+      - name: Contribute List
+        uses: akhilmhdh/contributors-readme-action@v2.3.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRESS_TOKEN_JUEJIN_BLOG }}
