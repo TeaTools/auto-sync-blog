@@ -27,7 +27,10 @@
 > `JUEJIN_COLUMN_ID` 为 7107151273765371941
 
 #### Q4：如何创建 PRESS_TOKEN_TEA_BLOG
-参考 [创建个人访问令牌](https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+点击右上角头像 ——》 Setting ——》 跳到的个人 Setting 页 ——》 往下拉直到出现 Developer settings 并点击 ——》 Personal access tokens ——》 Tokens (classic) ——》 Generate new token ——》 Generate new token (classic)
+
+也可参考 [创建个人访问令牌](https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
 #### Q5：仓库有更新，同步步骤
 仓库有更新时，在 Code 下会出现有 Sync fork ，点击并选择 Update branch，即完成同步仓库。（不影响原有功能）
