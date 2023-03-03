@@ -39,7 +39,7 @@ module.exports = {
     ],
   ],
   serviceWorker: true, // 是否开启 PWA
-  base: '/auto-sync-blog/', // 部署到github相关的配置
+  base: '/blog/', // 部署到github相关的配置
   markdown: {
     lineNumbers: true // 代码块是否显示行号
   },
