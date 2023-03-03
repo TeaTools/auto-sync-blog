@@ -142,4 +142,4 @@ http://localhost:8080/
 <a title="Q&A" href="Q&A.md">Question & Answer</a>
 
 ## License
-tea-blog.github.io is under the [GPL license](LICENSE).
+auto-sync-blog is under the [GPL license](LICENSE).
