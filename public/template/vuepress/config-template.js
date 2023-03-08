@@ -78,7 +78,7 @@ module.exports = {
       },
       {
         text: "🐛源码",
-        link: "https://github.com/tea-blog/tea-blog.github.io",
+        link: "https://github.com/tea-blog/auto-sync-blog",
       },
     ],
     displayAllHeaders: true,
