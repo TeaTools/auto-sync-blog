@@ -7,8 +7,8 @@ on:
       - master
 
   # 每天下午四点执行（也就是16点，需要-8小时，所以是8）
-  schedule:
-    - cron: "0 8 * * *"
+#   schedule:
+#     - cron: "0 8 * * *"
 
 jobs:
   blog-catch-and-pages:
