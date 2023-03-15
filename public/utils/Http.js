@@ -4,8 +4,7 @@ const juejinPost = async (url, data, limit) => { // limit 是指页的大小，�
     var articleList = []; // 记录文章列表
     var i = 0;
     var isOver = false;
-    var catchSum = 20; // 循环翻页请求的次数（1是请求一次，一次20页）；后面请求不到数据会停止
-    while (catchSum > i && !isOver) {
+    while (!isOver) {
         data.cursor = String(i * limit); // 专栏参数不需要*10，个人文章的参数需要*10
         console.log(data);
         var res = await post(url, data);
