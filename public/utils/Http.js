@@ -9,8 +9,18 @@ const juejinPost = async (url, data, limit) => { // limit 是指页的大小，�
         console.log(data);
         var res = await post(url, data);
         // console.log(res.data);
+        var isBadWebCount = 0;
+        while ((!res || !res.data) && isBadWebCount < 5) {
+            // 有可能网络异常，数据请求不到，那就重复5次
+            res = await post(url, data);
+            isBadWebCount++;
+        }
+        if (isBadWebCount >= 5) { // 三次之后还是有问题就抛出异常（事不过五）
+            console.log("请求故障，请重试！");
+            throw new Error("请求故障，请重试！");
+        }
         if (0 != res.data.err_no || !res.data.data || res.data.data.length == 0) {
-            console.log("已经获取全部数据 或 数据有误！");
+            console.log("已经获取全部数据！");
             break;
         }
         var artList = res.data.data;
