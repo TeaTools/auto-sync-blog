@@ -55,7 +55,7 @@ async function catchTxt(user_id, column_id) {
 
 
 // 进一步处理文章和更新操作
-function update(articleMap, BASE_DATA.MK_DIR_PATH, userBean) {
+function update(articleMap, mk_dir_path,  userBean) {
     var yymmMapList = []; // 年月日的已经排序好，不过是倒序的，所以遍历一般好让年月的时间正序起来
     articleMap.forEach((strMap, yymm) => {
         yymmMapList.push({
@@ -76,9 +76,9 @@ function update(articleMap, BASE_DATA.MK_DIR_PATH, userBean) {
             str
         } = strMap;
         const yy = yymm.substring(0, 4);
-        FileUtils.updateYYMM(yymm, str, BASE_DATA.MK_DIR_PATH + yy + "/", userBean);
-        FileUtils.updateYY(yymm, str, BASE_DATA.MK_DIR_PATH + yy + "/", userBean);
-        FileUtils.updateAll(yymm, str, BASE_DATA.MK_DIR_PATH, userBean);
+        FileUtils.updateYYMM(yymm, str, mk_dir_path + yy + "/", userBean);
+        FileUtils.updateYY(yymm, str, mk_dir_path + yy + "/", userBean);
+        FileUtils.updateAll(yymm, str, mk_dir_path, userBean);
     }
     return;
 }
