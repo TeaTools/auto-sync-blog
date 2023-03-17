@@ -1,10 +1,6 @@
-const {
-    getMapByString
-} = require('./DateUtils');
-const {
-    JUEJIN_URL,
-    JUEJIN_POST_URL,
-} = require('../base/base-data');
+const DateUtils = require('./DateUtils');
+
+const BASE_DATA = require("../base/base-data"); // 静态变量
 
 const fs = require('fs');
 
@@ -25,19 +21,32 @@ function getArticleMap(articleList) {
     for (var item of articleList) {
         var articleBean = getArticle(item);
         var ctime = parseInt(articleBean.ctime + "000");
-        var dateMap = getMapByString(ctime); // 获取年月日 map 存储
+        var dateMap = DateUtils.getMapByString(ctime); // 获取年月日 map 存储
         const {
             YMD,
             YYYYMM,
         } = dateMap;
         articleBean["YM"] = YYYYMM;
         articleBean["YMD"] = YMD; // 新增 转换年月日的（格式：x年x月x日）
-        var str = articleMap.get(YYYYMM);
-        if (!str) {
-            str = new String();
+        var strMap = articleMap.get(YYYYMM);
+
+        if (!strMap) {
+            strMap = {
+                str: "",
+                count: 0,
+            }
         }
-        str += article2MD(articleBean); // 转换成链接的形式，进行保存添加
-        articleMap.set(YYYYMM, str);
+        var {
+            str,
+            count
+        } = strMap;
+        str += article2MD(articleBean);
+        count++;
+        strMap = {
+            str,
+            count
+        }
+        articleMap.set(YYYYMM, strMap);
     }
     return articleMap;
 }
@@ -82,7 +91,7 @@ function getArticle(article) {
         cover_image,
         article_id,
         title,
-        postUrl: JUEJIN_POST_URL + article_id, // 文章地址
+        postUrl: BASE_DATA.JUEJIN_POST_URL + article_id, // 文章地址
         brief_content,
         ctime,
     }
