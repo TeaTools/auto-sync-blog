@@ -52,45 +52,72 @@ http://localhost:8080/
 
 ```cmd
  ./
+├─LICENSE
 ├─main.js // 主入口
-├─package-lock.json 
+├─package-lock.json
 ├─package.json // 相关依赖和启动方式
-├─README.md // 介绍 
 ├─Q&A.md // 问题统计与解决方法
+├─README.md // 介绍 
 ├─public // 主要部分
 |   ├─z-test // 测试
-|   |   └test.js
-|   ├─utils // 方法调用
-|   |   ├─ArticleUtils. // 文章数据处理
-|   |   ├─DateUtils.js // 时间处理
-|   |   ├─FileUtils.js // 文件处理
-|   |   ├─Http.js // 请求
-|   |   ├─minimist.js // node 入参处理
-|   |   └VuepressUtils.js // 生成 vuepress 相关配置
+|   |   └测试数据.js
 |   ├─template // 模板
 |   |    ├─vuepress // 生成 vuepress 相关配置的模板
 |   |    |    ├─config-template.js
 |   |    |    └readme-template.md
-|   |    ├─article // 生成 markdown 文件的模板
+|   |    ├─column // 生成专栏 markdown 文件的模板
+|   |    |   ├─article-template.md
+|   |    |   ├─hot-template.md
+|   |    |   └my-template.md
+|   |    ├─article // 生成时间分类 markdown 文件的模板
 |   |    |    ├─all-template.md
 |   |    |    ├─year-month-template.md
 |   |    |    └year-template.md
 |   ├─src // 主要部分的主入口
-|   |  └catch-main.js
-|   ├─base // 基础数据
-|   |  ├─base-data.js // 静态的数据
-|   |  └cover.jpg // 静态图片
+|   |  ├─work.js // 主要工作模块
+|   |  ├─generate // 生成模块
+|   |  |    ├─generate.js
+|   |  |    ├─vuepress
+|   |  |    |    └utils.js
+|   |  |    ├─juejin
+|   |  |    |   └utils.js
+|   |  |    ├─common
+|   |  |    |   ├─base.js
+|   |  |    |   └FileUtils.js
+|   |  ├─details // 解析模块
+|   |  |    ├─details.js
+|   |  |    ├─vuepress
+|   |  |    |    ├─base.js
+|   |  |    |    └utils.js
+|   |  |    ├─juejin
+|   |  |    |   ├─base.js
+|   |  |    |   └utils.js
+|   |  ├─catch // 获取模块
+|   |  |   ├─catch.js
+|   |  |   ├─juejin
+|   |  |   |   ├─base.js
+|   |  |   |   └utils.js
+|   ├─common // 公共方法
+|   |   ├─cover.jpg
+|   |   ├─utils
+|   |   |   ├─DateUtils.js
+|   |   |   ├─Http.js
+|   |   |   └minimist.js
 ├─docs // 以下是本地执行 node 后，会生成的文件夹和文件
 |  ├─README.md // vuepress 的相关配置
 |  ├─sort // 主要 markdown 文件
 |  |  ├─all.md
-|  |  ├─2023
+|  |  ├─column // 专栏分类
+|  |  |   ├─我的专栏.md
+|  |  |   ├─推荐专栏.md
+|  |  |   ├─my
+|  |  |   | ├─未分类.md
+|  |  |   | └茶博客.md
+|  |  |   ├─hot
+|  |  |   |  └茶博客.md
+|  |  ├─2023 // 时间分类
 |  |  |  ├─2023.md
-|  |  |  ├─202301.md
-|  |  |  └202302.md
-|  |  ├─2022
-|  |  |  ├─2022.md
-|  |  |  └202201.md
+|  |  |  └202304.md
 |  ├─.vuepress // vuepress 的相关配置
 |  |     ├─config.js
 |  |     ├─public
