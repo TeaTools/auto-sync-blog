@@ -52,35 +52,24 @@ module.exports = {
     modePicker: false, // 不显示模式调节按钮（true 显示）
     startYear: '{{start_year}}',
     nav: [{
-        text: "✍️总览",
-        link: "/sort/all.html",
-        // icon: 'reco-blog'
-      }, {
-        text: '🕙时间分类',
-        items: "{{time_sort_list}}"
-        // [{
-        //     text: '2022',
-        //     link: '/categories/2022/'
-        //   },
-        //   {
-        //     text: '2023',
-        //     link: '/categories/2023/'
-        //   }
-        // ]
-      },
-      {
-        text: "👣找到我",
-        link: "{{find_me_url}}",
-      },
-      {
-        text: "💌订阅",
-        link: "{{order_column_url}}",
-      },
-      {
-        text: "🐛源码",
-        link: "https://github.com/tea-blog/auto-sync-blog",
-      },
-    ],
+      text: "✍️总览",
+      link: "/sort/all.html",
+    }, {
+      text: '🕙时间分类',
+      items: "{{time_sort_list}}",
+    }, {
+      text: '📚专栏',
+      link: "/categories/专栏/",
+    }, {
+      text: "👣找到我",
+      link: "{{find_me_url}}",
+    }, {
+      text: "💌订阅",
+      link: "{{order_column_url}}",
+    }, {
+      text: "🐛源码",
+      link: "https://github.com/tea-blog/auto-sync-blog",
+    }, ],
     displayAllHeaders: true,
     sidebar: 'auto', // 侧边栏配置
     sidebarDepth: 2,

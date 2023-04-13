@@ -34,3 +34,8 @@
 
 #### Q5：仓库有更新，同步步骤
 仓库有更新时，在 Code 下会出现有 Sync fork ，点击并选择 Update branch，即完成同步仓库。（不影响原有功能）
+
+#### Q6：树状的目录显示用的是什么？
+用的 **treer** `npm install treer`
+
+`treer -d 项目名 -e treer.md -i "/node_modules|.git/"`
