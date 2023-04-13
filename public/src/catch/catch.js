@@ -51,7 +51,11 @@ async function hotColumnWork(columnIdList) {
     for (const columnId of columnIdList) {
         // 获取指定专栏的所有文章
         var columnArticleList = await JUEJIN.columnArtListPost(columnId);
-        var res = await JUEJIN.juejinColumnsInfoPost(columnId);
+        var res = await JUEJIN.juejinColumnsInfoPost(columnId);       
+        if (!res) {
+            global.JUEJIN_HOT_COLUMN_MAP = reaMap;
+            return;
+        }
         const {
             column_version,
             author,
