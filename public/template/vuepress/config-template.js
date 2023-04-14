@@ -48,7 +48,7 @@ module.exports = {
     logo: '{{logo_png}}',
     // authorAvatar: '/avatar.png',
     noFoundPageByTencent: true, // 关闭 404 腾讯公益
-    author: 'github.com/tea-blog',
+    author: 'github.com/TeaTools',
     modePicker: false, // 不显示模式调节按钮（true 显示）
     startYear: '{{start_year}}',
     nav: [{
@@ -68,7 +68,7 @@ module.exports = {
       link: "{{order_column_url}}",
     }, {
       text: "🐛源码",
-      link: "https://github.com/tea-blog/auto-sync-blog",
+      link: "https://github.com/TeaTools/auto-sync-blog",
     }, ],
     displayAllHeaders: true,
     sidebar: 'auto', // 侧边栏配置

@@ -16,7 +16,7 @@
 
 ### 直接部署流程（GitHub Fork）
 
-1. [Fork 仓库](https://github.com/tea-blog/tea-blog.github.io)
+1. [Fork 仓库](https://github.com/TeaTools/auto-sync-blog/fork)
 2. 仓库 -> Settings -> Secrets -> New repository secret, 添加 Secrets 变量如下:
 
     | Name                 | Value                                                         | Required |
