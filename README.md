@@ -144,7 +144,7 @@ http://localhost:8080/
         <a href="https://github.com/tea-blog">
             <img src="https://avatars.githubusercontent.com/u/68322136?v=4" width="100;" alt="tea-blog"/>
             <br />
-            <sub><b>南方者</b></sub>
+            <sub><b>茶博客</b></sub>
         </a>
     </td>
     <td align="center">
