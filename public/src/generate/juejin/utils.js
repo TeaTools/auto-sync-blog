@@ -95,8 +95,11 @@ function updateHotColumn(commonMap, dirPath) {
     var strList = idAndTitile.split("&&"); // [0]是id，[1]是标题，[2]是对应专栏的作者名
     var filePath = columnDirPath + "推荐专栏.md";
     var fileData = FileUtils.getFileData(filePath, BASE_DATA.COLUMN_HOT_TEMPLATE_PATH);
-    var templateValue = "- [{columnName}](hot/{columnName}) **文章数：{postTotal}**";
-    templateValue = templateValue.replaceAll("{columnName}", strList[1]).replaceAll("{postTotal}", columnCountMap["postTotal"]);
+    var templateValue = "- [{columnName}](hot/{columnPath}) **文章数：{postTotal}**";
+    templateValue = templateValue.replaceAll("{columnName}", strList[1])
+        .replaceAll("{postTotal}", columnCountMap["postTotal"])
+        .replaceAll("{columnPath}", strList[1].replaceAll(/ /g, "%20")); // 路径有空格的转为%20格式
+
     fileData = fileData.replaceAll("&{author}&", strList[2]) // 作者
     fileData += "\r\n" + templateValue;
     FileUtils.updateFile(filePath, fileData);
@@ -186,8 +189,10 @@ function updateColumn(commonMap, dirPath, userBean) {
     var strList = idAndTitile.split("&&"); // [0]是id，[1]是标题
     var filePath = columnDirPath + "我的专栏.md";
     var fileData = FileUtils.getFileData(filePath, BASE_DATA.COLUMN_MY_TEMPLATE_PATH);
-    var templateValue = "- [{columnName}](my/{columnName}) **文章数：{postTotal}**";
-    templateValue = templateValue.replaceAll("{columnName}", strList[1]).replaceAll("{postTotal}", columnCountMap["postTotal"]);
+    var templateValue = "- [{columnName}](my/{columnPath}) **文章数：{postTotal}**";
+    templateValue = templateValue.replaceAll("{columnName}", strList[1])
+        .replaceAll("{postTotal}", columnCountMap["postTotal"])
+        .replaceAll("{columnPath}", strList[1].replaceAll(/ /g, "%20"));
     fileData = fileData.replaceAll("&{author}&", userBean["user_name"]) // 作者
     fileData += "\r\n" + templateValue;
     FileUtils.updateFile(filePath, fileData);
