@@ -5,8 +5,6 @@ const BASE_DATA = require('./base');
 // 格式化对应的 README 配置内容
 const getREADME = (user_id, cover_png) => {
     // var cover_png = `/head.png`;
-    // console.log("BASE_DATA.BASE_COVER_JPG_PATH, BASE_DATA.VUEPRESS_PUBLIC_PATH + BASE_DATA.COVER_JPG",BASE_DATA.BASE_COVER_JPG_PATH, BASE_DATA.VUEPRESS_PUBLIC_PATH + BASE_DATA.COVER_JPG)
-    downloadLocalFile(BASE_DATA.BASE_COVER_JPG_PATH, BASE_DATA.VUEPRESS_PUBLIC_PATH + BASE_DATA.COVER_JPG);
     if (!cover_png) {
         cover_png = `/` + BASE_DATA.COVER_JPG;
         // 创建到 generate 生成模块
@@ -55,7 +53,7 @@ const getConfig = (userBean) => {
         .replaceAll("\"{{time_sort_list}}\"", time_sort_list_str)
         .replaceAll("{{user_name}}", user_name)
         .replaceAll("{{start_year}}", start_year)
-        .replaceAll("`{{baidu_coutn_url}}`", baidu_count_url)
+        .replaceAll("{{baidu_count_url}}", baidu_count_url)
         .replaceAll("{{favicon_ico}}", favicon_ico)
         .replaceAll("{{logo_png}}", logo_png)
     return template;
@@ -91,14 +89,7 @@ function getVuepressInfo(userBean, articleMap) {
     time_sort_list_str += "]";
     vuepressParams.time_sort_list_str = time_sort_list_str; // 时间分类生成
     vuepressParams.start_year = start_year; // 写作开始的年份
-    vuepressParams.baidu_count_url = `\`var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?f7c04e5ddb588d9604e7d1ef5b7483af";
-        var s = document.getElementsByTagName("script")[0]; 
-        s.parentNode.insertBefore(hm, s);
-      })();
-      \``; // 百度统计（有需要可自行修改为对应的 key ）
+    vuepressParams.baidu_count_url = userBean.baidu_count_url; // 百度统计（有需要可自行修改为对应的 key ）
     vuepressParams.find_me_url = userBean.home_url; // 找到我（掘金首页）
     vuepressParams.favicon_ico = userBean.avatar_large; // 页面标题旁的小图标
     vuepressParams.logo_png = userBean.avatar_large; // 头像

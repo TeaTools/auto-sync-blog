@@ -1,6 +1,8 @@
 const COVER_JPG = `cover.jpg`; // 首页导图名称
 const VUEPRESS_PUBLIC_PATH = `docs/.vuepress/public/`; // vuepress 生成静态资源
-const BASE_COVER_JPG_PATH = `public/base/cover.jpg`; // 一张基础静态图片地址
+const BASE_COVER_JPG_PATH = `public/template/vuepress/cover.jpg`; // 一张基础静态图片地址
+const BASE_PUBLIC_CSS_PATH = `public/template/vuepress/index.css`; // 全局 css 样式模板路径
+const PUBLIC_CSS_PATH = VUEPRESS_PUBLIC_PATH + `css/`; // 生成路径
 
 // 模板公共位置
 const TEMPLATE_PATH = "public/template/";
@@ -23,7 +25,6 @@ const CONFIG_FILE_PATH = "docs/.vuepress/config.js"; // config 生成路径
 module.exports = {
     COVER_JPG,
     VUEPRESS_PUBLIC_PATH,
-    BASE_COVER_JPG_PATH,
     README_TEMPLATE_PATH,
     CONFIG_TEMPLATE_PATH,
     YYMM_TEMPLATE_PATH,
@@ -35,4 +36,7 @@ module.exports = {
     CONFIG_FILE_PATH,
     COLUMN_MY_TEMPLATE_PATH,
     COLUMN_HOT_TEMPLATE_PATH,
+    BASE_PUBLIC_CSS_PATH,
+    PUBLIC_CSS_PATH,
+    BASE_COVER_JPG_PATH,
 }

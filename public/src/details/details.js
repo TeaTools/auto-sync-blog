@@ -5,7 +5,7 @@
 const JUEJIN = require("./juejin/utils");
 const VUEPRESS = require("./vuepress/utils");
 
-function voidDetailsWork() {
+function voidDetailsWork(baidu_count_url) {
     var {
         JUEJIN_ARTICLE_LIST, // 用户所有文章
         JUEJIN_COLUMN_MAP, // 用户所有专栏（key 专栏信息，value 对应文章列表）
@@ -18,13 +18,13 @@ function voidDetailsWork() {
 
     // 解析用户数据
     var userBean = JUEJIN.getUserInfo(JUEJIN_USER_INFO);
-
+    userBean.baidu_count_url = baidu_count_url;
     // 专栏数据
     var articleColumnList = JUEJIN.getArticleColumnList(JUEJIN_COLUMN_MAP);
 
     // 推荐专栏
     // console.log("JUEJIN_HOT_COLUMN_MAP", JUEJIN_HOT_COLUMN_MAP)
-    
+
     var articleHotColumnList = JUEJIN.getArticleColumnList(JUEJIN_HOT_COLUMN_MAP);
     // return
     // 统计数据

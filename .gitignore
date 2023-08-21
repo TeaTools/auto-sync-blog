@@ -2,8 +2,6 @@ docs/.vuepress/dist/*
 docs/*
 public/z-test/*
 
-.github/*
-
 .idea
 .vscode
 

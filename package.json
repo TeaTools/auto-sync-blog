@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.80",
+    "@vssue/api-github-v4": "^1.4.7",
+    "@vssue/vuepress-plugin-vssue": "^1.4.8",
     "fs": "0.0.1-security",
     "mailchimp": "^1.2.1",
     "path": "^0.12.7",

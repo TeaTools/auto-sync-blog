@@ -70,7 +70,7 @@ function isUpdateYYOrYYMM(startyymm, content, countMap) {
     var findTemplatePosition = content.indexOf(templateValue) + templateValue.length;
     content = updateOptPosition(findTemplatePosition, "\r\n" + findOrUpdateStr, content);
     findTemplatePosition += "\r\n".length + findOrUpdateStr.length;
-    var ymTemplateStr = "\r\n" + "**当月文章数：" + countMap[startyymm] + "**";
+    var ymTemplateStr = "\r\n" + "**该月文章数：" + countMap[startyymm] + "**";
     content = updateOptPosition(findTemplatePosition, ymTemplateStr, content);
     findTemplatePosition += ymTemplateStr.length;
     return {
