@@ -22,14 +22,13 @@ jobs:
         with:
           node-version: "16.x"
 
-      - name: install and run
+      - name: Install and run
         run: npm install
         
       - run: node main.js --juejin_user_id=${{ secrets.JUEJIN_USER_ID }} --juejin_column_id=${{ secrets.JUEJIN_COLUMN_ID }}
 
-      - name: Install and Build
+      - name: Build
         run: |
-          npm install
           npm run build
       # 查看 workflow 的文档来获取更多信息
       # @see https://github.com/crazy-max/ghaction-github-pages

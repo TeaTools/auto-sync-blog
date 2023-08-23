@@ -6,7 +6,7 @@
 
 ## 项目介绍
 
-项目名：**自动化同步文章平台（auto-sync-blog）**
+项目名：[**自动化同步文章平台（auto-sync-blog）**](https://juejin.cn/post/7210387904748503095)
 
 作用：实现在写作平台（如掘金、CSDN、简书等）的每日能进行自动同步数据（文章标题和链接）；同时，对文章进行友好的分类，并实现更直观的浏览那些年写过的文章。（目前仅支持掘金平台的同步，其他还在开发。）
 
@@ -141,6 +141,13 @@ http://localhost:8080/
 <table>
 <tr>
     <td align="center">
+        <a href="https://github.com/NanFangZhe404">
+            <img src="https://avatars.githubusercontent.com/u/86654383?v=4" width="100;" alt="NanFangZhe404"/>
+            <br />
+            <sub><b>南方者</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/tea-blog">
             <img src="https://avatars.githubusercontent.com/u/68322136?v=4" width="100;" alt="tea-blog"/>
             <br />
@@ -153,17 +160,11 @@ http://localhost:8080/
             <br />
             <sub><b>Ylimhs</b></sub>
         </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/NanFangZhe404">
-            <img src="https://avatars.githubusercontent.com/u/86654383?v=4" width="100;" alt="NanFangZhe404"/>
-            <br />
-            <sub><b>南方者</b></sub>
-        </a>
     </td></tr>
 </table>
 <!-- readme: collaborators,contributors -end -->
-欢迎各位英雄豪杰加入，共建更完美的 **自动化同步文章平台（auto-sync-blog）** 。
+
+欢迎各位英雄豪杰加入，共建更完美的 [**自动化同步文章平台（auto-sync-blog）**](https://juejin.cn/post/7210387904748503095) 。
 
 ## 问题回答（Question & Answer）
 <a title="Q&A" href="Q&A.md">Question & Answer</a>

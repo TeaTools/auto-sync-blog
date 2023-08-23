@@ -6,12 +6,14 @@ const run = () => {
     const {
         juejin_user_id,
         juejin_column_id,
+        baidu_count_url,
     } = argv;
     if (!juejin_user_id) {
         console.log("juejin_user_id不能为空，是必选！");
         return;
     }
-    WORK.run(String(juejin_user_id), String(juejin_column_id));
+    // 当前未解决百度统计问题，参数接收出现问题（baidu_count_url是失效状态）
+    WORK.run(String(juejin_user_id), String(juejin_column_id), baidu_count_url);
 };
 
 run();

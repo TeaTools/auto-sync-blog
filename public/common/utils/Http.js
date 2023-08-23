@@ -9,7 +9,6 @@ const sleep = async (sTime) => new Promise(resolve => {
     }
     setTimeout(resolve, sTime)
 });
-
 const post = async (url, data) => {
     return await axios.post(url,
         JSON.stringify(data), {
