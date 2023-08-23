@@ -6,6 +6,8 @@ const DETAILS_WORK = require("./details/details");
 const GENERATE_WORK = require("./generate/generate");
 
 async function run(juejin_user_id, juejin_column_id, baidu_count_url) {
+    // if (!baidu_count_url)
+    // 当前未解决百度统计问题，参数接收出现问题
     if (!baidu_count_url)
         baidu_count_url = `var _hmt = _hmt || [];
     (function() {
@@ -13,8 +15,7 @@ async function run(juejin_user_id, juejin_column_id, baidu_count_url) {
       hm.src = "https://hm.baidu.com/hm.js?f7c04e5ddb588d9604e7d1ef5b7483af";
       var s = document.getElementsByTagName("script")[0]; 
       s.parentNode.insertBefore(hm, s);
-    })();`;
-    var juejinBody = {
+    })();`;var juejinBody = {
         juejin_user_id,
         juejin_column_list: [juejin_column_id],
         baidu_count_url,

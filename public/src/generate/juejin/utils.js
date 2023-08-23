@@ -170,37 +170,76 @@ function updateArticleColumnList(columnList, userBean) {
         };
         // console.log(yymmMapList);
         // return;
-        updateColumn(commonMap, BASE_DATA.DOCS_SORT_PATH, userBean);
         for (var backIndex in yymmMapList) {
             var oneMap = yymmMapList[yymmMapList.length - backIndex - 1];
             updateArticleColumn(commonMap, oneMap, BASE_DATA.DOCS_SORT_PATH, userBean);
         }
     }
+    updateColumn(columnList, commonMap, BASE_DATA.DOCS_SORT_PATH, userBean);
 }
 
 // 更新专栏md
-function updateColumn(commonMap, dirPath, userBean) {
+function updateColumn(columnList, commonMap, dirPath, userBean) {
     const columnDirPath = dirPath + "column/";
-    // var isMkHotDir = FileUtils.mkdirsSync(hotDirPath);
     var isMkMyDir = FileUtils.mkdirsSync(columnDirPath);
     if (!isMkMyDir) {
         console.log('新建文件夹有误！', "isMkMyDir", isMkMyDir, );
         return;
     }
-    const {
-        idAndTitile,
-        columnCountMap,
-    } = commonMap;
-    var strList = idAndTitile.split("&&"); // [0]是id，[1]是标题
-    var filePath = columnDirPath + "我的专栏.md";
+    // console.log("columnList", columnList)
+    // console.log("commonMap", commonMap)
+    let count = 0;
+    let uColumnOne = "";
+    const templateValue = "**[{columnName}](my/{columnName})**|{postTotal}";
+    for (var i = 0; i < columnList.length; i++) {
+        var articleColumn = columnList[i];
+        var {
+            idAndTitile,
+            columnCountMap,
+            articleMap,
+        } = articleColumn;
+        var strList = idAndTitile.split("&&"); // [0]是id，[1]是标题
+        uColumnOne += "|" + templateValue.replaceAll("{columnName}", strList[1]).replaceAll("{postTotal}", columnCountMap["postTotal"]);
+        count++;
+        if (count === 3) {
+            var filePath = columnDirPath + "我的专栏.md";
+            var fileData = FileUtils.getFileData(filePath, BASE_DATA.COLUMN_MY_TEMPLATE_PATH);
+            fileData += uColumnOne + "|\r\n";
+            FileUtils.updateFile(filePath, fileData);
+            count = 0;
+            uColumnOne = "";
+        }
+    }
     var fileData = FileUtils.getFileData(filePath, BASE_DATA.COLUMN_MY_TEMPLATE_PATH);
-
-    // var templateValue = "- [{columnName}](my/{columnName}) **文章数：{postTotal}**";
-    var templateValue = "|**[{columnName}](my/{columnName})**|{postTotal}|";
-    templateValue = templateValue.replaceAll("{columnName}", strList[1]).replaceAll("{postTotal}", columnCountMap["postTotal"]);
+    if (count > 0 && count < 3) {
+        fileData += uColumnOne + "|\r\n";
+    }
     fileData = fileData.replaceAll("&{author}&", userBean["user_name"]) // 作者
-    fileData += templateValue + "\r\n";
     FileUtils.updateFile(filePath, fileData);
+
+    return;
+    // throw new Error("报错了啊的", columnList)
+
+    // const columnDirPath = dirPath + "column/";
+    // // var isMkHotDir = FileUtils.mkdirsSync(hotDirPath);
+    // var isMkMyDir = FileUtils.mkdirsSync(columnDirPath);
+    // if (!isMkMyDir) {
+    //     console.log('新建文件夹有误！', "isMkMyDir", isMkMyDir, );
+    //     return;
+    // }
+    // const {
+    //     idAndTitile,
+    //     columnCountMap,
+    // } = commonMap;
+    // var strList = idAndTitile.split("&&"); // [0]是id，[1]是标题
+    // var filePath = columnDirPath + "我的专栏.md";
+    // var fileData = FileUtils.getFileData(filePath, BASE_DATA.COLUMN_MY_TEMPLATE_PATH);
+    // // var templateValue = "- [{columnName}](my/{columnName}) **文章数：{postTotal}**";
+    // var templateValue = "|**[{columnName}](my/{columnName})**|{postTotal}|";
+    // templateValue = templateValue.replaceAll("{columnName}", strList[1]).replaceAll("{postTotal}", columnCountMap["postTotal"]);
+    // fileData = fileData.replaceAll("&{author}&", userBean["user_name"]) // 作者
+    // fileData += templateValue + "\r\n";
+    // FileUtils.updateFile(filePath, fileData);
 }
 
 function updateArticleColumn(commonMap, oneMap, dirPath, userBean) {
