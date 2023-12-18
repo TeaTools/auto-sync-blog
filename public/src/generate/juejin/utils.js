@@ -24,10 +24,16 @@ function updateYY(startyymm, addData, dirPath, countMap, userBean) { // 更新�
     if (findPosition !== -1) { // 存在这个更新
         fileData = fileData.replaceAll("&{count}&", countMap[yy]);
         for (const keyYM in countMap) {
-            if (keyYM.length > 4) {
-                var mm = keyYM.substring(4);
-                fileData = fileData.replaceAll("&{" + mm + "}&", countMap[keyYM]);
+            if (keyYM.length < 5) {
+                // 长度小于 4 跳过
+                continue;
             }
+            if (keyYM.indexOf(yy) < 0) {
+                // 不属于对应年份跳过
+                continue;
+            }
+            var mm = keyYM.substring(4);
+            fileData = fileData.replaceAll("&{" + mm + "}&", countMap[keyYM]);
         }
         const regex = /&\{(0[1-9]|1[0-2])\}&/g;
         fileData = fileData.replace(regex, "-");
@@ -37,7 +43,7 @@ function updateYY(startyymm, addData, dirPath, countMap, userBean) { // 更新�
 }
 
 function updateArticleMap(articleMap, countMap, userBean) {
-    var yymmMapList = []; // 年月日的已经排序好，不过是倒序的，所以遍历一般好让年月的时间正序起来
+    var yymmMapList = []; // 年月日的已经排序好，不过是升序的，所以遍历一般好让年月的时间升序起来
     articleMap.forEach((strMap, yymm) => {
         yymmMapList.push({
             yymm,
@@ -52,10 +58,10 @@ function updateArticleMap(articleMap, countMap, userBean) {
             yymm,
             strMap
         } = oneMap;
-        // console.log(oneMap, str, yymm)
         const {
             str
         } = strMap;
+        // console.log("-----------------------", oneMap, str, yymm, countMap)
         updateCommon(yymm, str, BASE_DATA.DOCS_SORT_PATH, countMap, userBean);
     }
 }
@@ -95,7 +101,7 @@ function updateHotColumn(commonMap, dirPath) {
     // var isMkHotDir = FileUtils.mkdirsSync(hotDirPath);
     var isMkMyDir = FileUtils.mkdirsSync(columnDirPath);
     if (!isMkMyDir) {
-        console.log('新建文件夹有误！', "isMkMyDir", isMkMyDir, );
+        console.log('新建文件夹有误！', "isMkMyDir", isMkMyDir,);
         return;
     }
     const {
@@ -117,7 +123,7 @@ function updateArticleHotColumn(commonMap, oneMap, dirPath) {
     const hotDirPath = dirPath + "column/hot/";
     var isMkHotDir = FileUtils.mkdirsSync(hotDirPath);
     if (!isMkHotDir) {
-        console.log('新建文件夹有误！', "isMkHotDir", isMkHotDir, );
+        console.log('新建文件夹有误！', "isMkHotDir", isMkHotDir,);
         return;
     }
     const {
@@ -183,7 +189,7 @@ function updateColumn(columnList, commonMap, dirPath, userBean) {
     const columnDirPath = dirPath + "column/";
     var isMkMyDir = FileUtils.mkdirsSync(columnDirPath);
     if (!isMkMyDir) {
-        console.log('新建文件夹有误！', "isMkMyDir", isMkMyDir, );
+        console.log('新建文件夹有误！', "isMkMyDir", isMkMyDir,);
         return;
     }
     // console.log("columnList", columnList)
@@ -252,7 +258,7 @@ function updateArticleColumn(commonMap, oneMap, dirPath, userBean) {
     //     return;
     // }
     if (!isMkMyDir) {
-        console.log('新建文件夹有误！', "isMkMyDir", isMkMyDir, );
+        console.log('新建文件夹有误！', "isMkMyDir", isMkMyDir,);
         return;
     }
     const {
@@ -295,7 +301,7 @@ function updateCommon(startyymm, addData, dirPath, countMap, userBean) {
     const yearDirPath = dirPath + yy + "/";
     var isMkYearDir = FileUtils.mkdirsSync(yearDirPath);
     if (!isMkDir || !isMkYearDir) {
-        console.log('新建文件夹有误！', "isMkDir：", isMkDir, "isMkYearDir：", isMkYearDir, );
+        console.log('新建文件夹有误！', "isMkDir：", isMkDir, "isMkYearDir：", isMkYearDir,);
         return;
     }
     updateYYMM(startyymm, addData, yearDirPath, countMap, userBean);
