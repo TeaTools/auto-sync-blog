@@ -40,7 +40,7 @@ module.exports = {
     ['link',{rel:'stylesheet',href:'/css/index.css'}],
   ],
   serviceWorker: true, // 是否开启 PWA
-  base: '/auto-sync-blog/', // 部署到github相关的配置
+  // base: '/auto-sync-blog/', // 部署到github相关的配置
   markdown: {
     lineNumbers: true // 代码块是否显示行号
   },
