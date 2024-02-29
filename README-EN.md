@@ -135,9 +135,11 @@ http://localhost:8080/
     </td></tr>
 </table>
 <!-- readme: collaborators,contributors -end -->
+
 欢迎各位英雄豪杰加入，共建更完美的 **自动化同步文章平台（auto-sync-blog）** 。
 
 ## 问题回答（Question & Answer）
+
 <a title="Q&A" href="Q&A.md">Question & Answer</a>
 
 ## License
