@@ -70,7 +70,7 @@ module.exports = {
       link: "{{order_column_url}}",
     }, {
       text: "🐛源码",
-      link: "https://github.com/tea-blog/auto-sync-blog",
+      link: "https://github.com/TeaTools/auto-sync-blog",
     }, ],
     displayAllHeaders: true,
     sidebar: 'auto', // 侧边栏配置
