@@ -17,7 +17,7 @@ export default {
     tagline: "专注于发掘站内优质创作者和优质内容",
     image: "",
     actions: [
-      { theme: "brand", text: "开始阅读", link: "/main" },
+      { theme: "brand", text: "开始阅读", link: "/overview" },
       { theme: "alt", text: "关注掘金", link: "https://miyuefe.cn" },
     ],
     features: [
@@ -28,11 +28,11 @@ export default {
     nav: ["overview", "annual", "column", "follow"],
     socialLinks: {
       github: "https://github.com/miyuesc",
-      // discord: "",
+      discord: "/",
       // facebook: "",
       // linkedin: "",
-      // twitter: "",
-      // youtube: "",
+      twitter: "/",
+      youtube: "/",
     },
   },
 
