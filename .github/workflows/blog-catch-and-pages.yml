@@ -24,7 +24,7 @@ jobs:
 
       - name: Install and run
         run: npm install
-        
+
       - run: node main.js --juejin_user_id=${{ secrets.JUEJIN_USER_ID }} --juejin_column_id=${{ secrets.JUEJIN_COLUMN_ID }}
 
       - name: Build
@@ -37,4 +37,4 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.PRESS_TOKEN_TEA_BLOG }}
           BRANCH: gh-pages
-          FOLDER: docs/.vuepress/dist
+          FOLDER: docs/.vitepress/dist
