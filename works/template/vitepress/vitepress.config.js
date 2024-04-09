@@ -1,3 +1,4 @@
+// vitepress 配置文件模板
 export default `import { defineConfig } from "vitepress"
 
 export default defineConfig({
