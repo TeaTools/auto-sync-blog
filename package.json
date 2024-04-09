@@ -1,20 +1,28 @@
 {
-  "dependencies": {
-    "@mailchimp/mailchimp_marketing": "^3.0.80",
-    "@vssue/api-github-v4": "^1.4.7",
-    "@vssue/vuepress-plugin-vssue": "^1.4.8",
-    "fs": "0.0.1-security",
-    "mailchimp": "^1.2.1",
-    "path": "^0.12.7",
-    "vue-template-compiler": "^2.7.14",
-    "vuepress": "^1.9.8"
-  },
+  "name": "auto-sync-blog",
+  "description": "",
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "start": "vuepress dev docs",
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "prepare": "npm install",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "sync:blog": "node works/index.js",
+    "dev:blog": "vitepress dev docs",
+    "build:blog": "vitepress build docs"
+  },
+  "author": "https://github.com/TeaTools",
+  "repository": "https://github.com/TeaTools/auto-sync-blog",
+  "dependencies": {
+    "@nolebase/vitepress-plugin-enhanced-readabilities": "^1.22.4",
+    "axios": "^1.6.7",
+    "vitepress": "1.0.0-rc.44",
+    "vue": "^3.4.21"
   },
   "devDependencies": {
-    "vuepress-theme-reco": "^1.6.6"
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5"
   }
 }
