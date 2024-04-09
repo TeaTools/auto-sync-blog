@@ -21,3 +21,5 @@ export const DOCS_SORT_PATH = "docs/sort/"; // 生成文件的地址
 export const CONFIG_FILE_PATH = "docs/.vitepress/config"; // config 生成路径
 // 默认 index.md 位置
 export const DOCS_FILE_PATH = "docs/src";
+// 概览页
+export const OVERVIEW_FILE_PATH = "docs/src/overview";
