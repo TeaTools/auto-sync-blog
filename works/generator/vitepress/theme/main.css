@@ -228,6 +228,11 @@ kbd {
 .vp-doc a:hover {
   text-decoration: underline;
 }
-.aside-container {
-  padding-bottom: 200px;
+
+.VPTeamMembers .avatar {
+  border-radius: 6px;
+}
+.VPTeamMembers .avatar .avatar-img {
+  height: 100%;
+  object-fit: contain;
 }
