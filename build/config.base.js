@@ -23,3 +23,5 @@ export const CONFIG_FILE_PATH = "docs/.vitepress/config"; // config 生成路径
 export const DOCS_FILE_PATH = "docs/src";
 // 概览页
 export const OVERVIEW_FILE_PATH = "docs/src/overview";
+// 专栏
+export const COLUMNS_FILE_PATH = "docs/src/columns";

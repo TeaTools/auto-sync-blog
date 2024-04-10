@@ -4,7 +4,7 @@ export default {
     title: "每日掘金",
     description: "专注于发掘站内优质创作者和优质内容",
     logo: "",
-    siteName: "",
+    siteName: "blog.miyuefe.cn",
     head: [],
     keywords: ["前端", "后端", "移动端", "每日掘金", "酱酱的下午茶", "掘金", "掘金酱"],
     author: "MiyueFE"
@@ -15,9 +15,9 @@ export default {
     name: "每日掘金",
     text: "",
     tagline: "专注于发掘站内优质创作者和优质内容",
-    image: "",
+    image: "https://vitepress.dev/vitepress-logo-large.webp",
     actions: [
-      { theme: "brand", text: "开始阅读", link: "/overview" },
+      { theme: "brand", text: "开始阅读", link: "/overview/index" },
       { theme: "alt", text: "关注掘金", link: "https://miyuefe.cn" },
     ],
     features: [

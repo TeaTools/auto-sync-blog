@@ -9,7 +9,7 @@ import { mkDir } from "../../utils/file-process.js"
 const NAV_LINKS = {
   overview: {
     text: "总览",
-    link: "/sort/all",
+    link: "/overview/index",
   },
   annual: {
     text: "年度",
@@ -17,7 +17,7 @@ const NAV_LINKS = {
   },
   column: {
     text: "专栏",
-    link: "/categories/专栏/",
+    link: "/columns/index",
   },
   follow: {
     text: "关注",
@@ -50,6 +50,9 @@ const processSocialLinks = (press) => {
 
 const processPressHead = (blog) => {
   const STATIC_HEAD = [
+    ["meta", { name: "viewport", content: "width=device-width,initial-scale=1,user-scalable=no" }],
+    ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
+    ["meta", { name: "apple-mobile-web-app-status-bar-style", content: "black" }],
     ["link", { rel: "icon", href: blog.logo }],
     ["meta", { name: "description", content: blog.description }],
     ["meta", { property: "og:type", content: "website" }],
