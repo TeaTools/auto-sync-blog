@@ -12,7 +12,6 @@ export const processColumnsOverview = async () => {
   let columnMd = `# 我的专栏`
 
   for (const [columnId, column] of columnMap) {
-    console.log(column)
 
     const { articles, columnInfo } = column
 
