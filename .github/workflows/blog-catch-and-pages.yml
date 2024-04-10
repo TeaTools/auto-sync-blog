@@ -27,7 +27,7 @@ jobs:
           version: 8
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Sync juejin blog
         run: npm run sync:blog
