@@ -68,23 +68,3 @@ export const getUserColumns = async (userId) => {
 export const getColumnArticles = async (columnId) => {
   return await commonPollingRequest(COLUMN_API, getColumnsParams(columnId))
 }
-// 所有专栏与文章列表
-export const processColumnArticleMap = async (columnList, articlesMap, callback) => {
-  const columnMap = new Map()
-
-  for (let i = 0; i < columnList.length; i++) {
-    const { column, column_version, column_id } = columnList[i]
-
-    if (!column_version || columnMap.get(column_id)) continue
-
-    const { content_sort_ids = [] } = column
-
-    const columnArticleList = content_sort_ids.map((id) => articlesMap.get(id))
-
-    callback && callback(columnArticleList)
-
-    columnMap.set(column_id, { articles: columnArticleList, columnInfo: columnList[i] })
-  }
-
-  return columnMap
-}

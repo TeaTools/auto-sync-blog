@@ -2,8 +2,8 @@ import { OVERVIEW_FILE_PATH } from "../../../build/config.base.js"
 import { mkdirp } from "mkdirp"
 import { writeFileSync } from "fs"
 import { insertString } from "../../utils/common.js"
-import { getArticles } from "../../store/index.js"
-import { article2MD } from "./utils.js"
+import { getArticles, getArticlesAndColumnsMap } from "../../store/index.js"
+import { article2MD, overviewTableMD } from "./utils.js"
 
 export const processArticleTimesCollection = (articleList = []) => {
   const timesCollectionMap = new Map()
@@ -27,19 +27,21 @@ export const processArticleTimesCollection = (articleList = []) => {
 }
 
 const processOverviewTimeCollectionItem = (collectionItem, key) => {
-  return `## ${insertString(key, 4, "-")}
+  return `\n## ${insertString(key, 4, "年")}月
 
-  **该月文章数：${collectionItem.count}。**
+  **发布文章数：${collectionItem.count}**
 
   ${collectionItem.str}
 `
 }
 
 export const processOverviewMD = async () => {
-  const articles = await getArticles()
+  const { articles, yearMonthCollection, yearCollection } = await getArticlesAndColumnsMap()
   const timesCollectionMap = await processArticleTimesCollection(articles)
 
-  let md = ""
+  let md = `# 累计发布 ${articles.length}`
+
+  md += overviewTableMD(yearCollection, yearMonthCollection)
 
   timesCollectionMap.forEach((item, key) => (md += processOverviewTimeCollectionItem(item, key)))
 

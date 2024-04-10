@@ -3,7 +3,7 @@ export const vitePressConfigJs =  `import { defineConfig } from "vitepress"
 
 export default defineConfig({
   title: "{{ name }}",
-  appearance: "dark",
+  appearance: "light",
   description: "{{ description }}",
   locales: {
     root: {

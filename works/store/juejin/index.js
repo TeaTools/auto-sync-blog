@@ -1,12 +1,33 @@
-import { getUserArticles, getUserColumns, processColumnArticleMap } from "../../requests/juejin.js"
+import { getUserArticles, getUserColumns } from "../../requests/juejin.js"
 import configurations from "../../../configurations.js"
 import { getArticleInfo } from "../../generator/juejin/utils.js"
 
 let articles = null
+let yearCollection = new Map()
+let yearMonthCollection = new Map()
 
 export const setArticles = async (newArticles = [], useSort = false) => {
-  newArticles.forEach(article => {
-    article.formatInfo = getArticleInfo(article)
+  yearCollection.clear()
+  yearMonthCollection.clear()
+
+  newArticles.forEach((article) => {
+    const formatInfo = getArticleInfo(article)
+
+    const { YY, YYYYMM } = formatInfo.dateMap
+    if (!yearMonthCollection.get(YYYYMM)) {
+      yearMonthCollection.set(YYYYMM, 0)
+    }
+    const yearMonthColl = yearMonthCollection.get(YYYYMM)
+    yearMonthCollection.set(YYYYMM, yearMonthColl + 1)
+
+    if (!yearCollection.get(YY)) {
+      yearCollection.set(YY, { count: 0, articles: [] })
+    }
+    const coll = yearCollection.get(YY)
+    coll.count += 1
+    coll.articles.push(article)
+
+    article.formatInfo = formatInfo
   })
 
   articles = newArticles
@@ -39,6 +60,27 @@ export const getColumns = async () => {
 
 let articlesAndColumnsMap = { articles, columns }
 
+// 所有专栏与文章列表
+export const processColumnArticleMap = async (columnList, articlesMap, callback) => {
+  const columnMap = new Map()
+
+  for (let i = 0; i < columnList.length; i++) {
+    const { column, column_version, column_id } = columnList[i]
+
+    if (!column_version || columnMap.get(column_id)) continue
+
+    const { content_sort_ids = [] } = column
+
+    const columnArticleList = content_sort_ids.map((id) => articlesMap.get(id))
+
+    callback && callback(columnArticleList)
+
+    columnMap.set(column_id, { articles: columnArticleList, columnInfo: columnList[i] })
+  }
+
+  return columnMap
+}
+
 export const setArticlesAndColumnsMap = async (key, value) => {
   articlesAndColumnsMap[key] = value
   return articlesAndColumnsMap
@@ -49,7 +91,7 @@ export const getArticlesAndColumnsMap = async () => {
 
   const articlesMap = new Map()
 
-  articles.forEach(article => articlesMap.set(article.article_id, article))
+  articles.forEach((article) => articlesMap.set(article.article_id, article))
 
   let unColumnArticles = [...articles]
 
@@ -67,11 +109,13 @@ export const getArticlesAndColumnsMap = async () => {
 
   const columnMap = await processColumnArticleMap(columns, articlesMap, removeUnColumnArticle)
 
-  return {
+  return (articlesAndColumnsMap = {
     articles,
     articlesMap,
     unColumnArticles,
     columns,
     columnMap,
-  }
+    yearCollection,
+    yearMonthCollection,
+  })
 }

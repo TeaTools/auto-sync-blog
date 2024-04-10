@@ -230,13 +230,9 @@ kbd {
   margin-right: 0;
 }
 
-/**
- * Component: MediumZoom
- * -------------------------------------------------------------------------- */
-.medium-zoom-overlay {
-  z-index: 20;
+.vp-doc a {
+  text-decoration: none;
 }
-
-.medium-zoom-image {
-  z-index: 21;
+.vp-doc a:hover {
+  text-decoration: underline;
 }
