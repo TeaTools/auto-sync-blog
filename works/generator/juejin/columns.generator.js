@@ -33,7 +33,7 @@ export const processColumnDetail = async (column, articles) => {
   let md = `# ${column.column_version.title}`
 
   articles && articles.forEach(article => {
-    md += `\n${article2MD(article.formatInfo)}`
+    md += `\n${article2MD(article.formatInfo, false)}`
   })
 
   await writeFileSync(`${COLUMNS_FILE_PATH}/${column.column_id}.md`, md, (err) => {

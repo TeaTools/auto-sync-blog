@@ -14,6 +14,7 @@ export const getArticleInfo = (article) => {
       comment_count,
       collect_count,
     },
+    tags = [],
   } = article
 
   const dateMap = dateFormatter(parseInt(ctime + "000"))
@@ -30,15 +31,20 @@ export const getArticleInfo = (article) => {
     digg_count,
     comment_count,
     collect_count,
+    tags: tags.map((t) => t.tag_name),
   }
 }
 
-export function article2MD(articleBean) {
-  const { title, postUrl, dateMap, view_count, digg_count, comment_count, collect_count, brief_content } = articleBean
+export function article2MD(articleBean, useList = true) {
+  const { title, postUrl, dateMap, view_count, digg_count, comment_count, collect_count, brief_content, tags } =
+    articleBean
 
-  let txt = "\r\n- [" + dateMap.YMD + "：" + title + "](" + postUrl + ")"
+  let txt = `\r\n${useList ? "-" : "###"} [${title}](${postUrl})`
 
-  txt += `\n\r > \`${brief_content}\`... \n\n> · ${view_count} 阅读 · ${digg_count} 点赞 · ${comment_count} 评论 · ${collect_count} 收藏 ·`
+  txt += `\n\r > ${brief_content}...`
+  txt += `\n>\n> 发布日期：${dateMap.YMD}`
+  txt += `\n\n · ${view_count} 阅读 · ${digg_count} 点赞 · ${comment_count} 评论 · ${collect_count} 收藏 ·`
+  txt += `\n\n ${tags.map((tagName) => `\`${tagName}\``).join("  ")}`
 
   let reg = /<[^>]+>/gi
   txt = txt.replace(reg, (match) => "`" + match + "`")

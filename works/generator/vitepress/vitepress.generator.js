@@ -8,19 +8,19 @@ import { mkDir } from "../../utils/file-process.js"
 
 const NAV_LINKS = {
   overview: {
-    text: "总览",
+    text: "文章总览",
     link: "/overview/index",
   },
-  annual: {
-    text: "年度",
-    items: [],
-  },
   column: {
-    text: "专栏",
+    text: "我的专栏",
     link: "/columns/index",
   },
+  annual: {
+    text: "年度统计",
+    items: [],
+  },
   follow: {
-    text: "关注",
+    text: "关注我",
     link: "",
   },
 }
