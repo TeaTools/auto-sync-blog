@@ -20,21 +20,21 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "16.x"
+          node-version: "18.x"
 
-      - name: Install and run
+      - name: Install dependencies
         run: npm install
 
-      - run: node main.js --juejin_user_id=${{ secrets.JUEJIN_USER_ID }} --juejin_column_id=${{ secrets.JUEJIN_COLUMN_ID }}
+      - name: Sync juejin blog
+        run: npm run sync:blog
 
       - name: Build
-        run: |
-          npm run build
-      # 查看 workflow 的文档来获取更多信息
-      # @see https://github.com/crazy-max/ghaction-github-pages
+        run: npm run sync:blog
+
+      # 发布
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          ACCESS_TOKEN: ${{ secrets.PRESS_TOKEN_TEA_BLOG }}
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: docs/.vitepress/dist
