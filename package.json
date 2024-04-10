@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "prepare": "npm install",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "sync:blog": "node works/index.js",
