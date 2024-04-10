@@ -5,7 +5,7 @@ import { writeFileSync } from "fs"
 
 export const processTagsOverview = async () => {
   await mkdirp(TAGS_FILE_PATH)
-  
+
   const { tagCollection } = await getArticlesAndColumnsMap()
 
   let tagMD = `# 我的标签`
@@ -16,7 +16,7 @@ export const processTagsOverview = async () => {
 
     tagMD += `\n\n## ${info.tag_name}`
     tagMD += `\n\n> · ${count} 文章 ·`
-    tagMD += `\n> [进入标签](/categories/${tag_id})`
+    tagMD += `\n> [进入标签](/tags/${tag_id})`
 
     await processTagDetail(tagColl, articles)
   }
