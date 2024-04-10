@@ -16,6 +16,14 @@ const NAV_LINKS = {
     text: "我的专栏",
     link: "/columns/index",
   },
+  category: {
+    text: "我的分类",
+    link: "/categories/index",
+  },
+  tag: {
+    text: "我的标签",
+    link: "/tags/index",
+  },
   annual: {
     text: "年度统计",
     items: [],

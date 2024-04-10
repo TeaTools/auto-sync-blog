@@ -13,7 +13,7 @@ export default {
   // vite press 构建配置
   press: {
     name: "每日掘金",
-    text: "",
+    text: "了解社区最新动态，发现最优质文章、最优质的你。",
     tagline: "专注于发掘站内优质创作者和优质内容",
     image: "https://vitepress.dev/vitepress-logo-large.webp",
     actions: [
@@ -25,7 +25,7 @@ export default {
       { icon: "🎁", title: "数据分析小能手", details: "年月总览统计数据分析" },
       { icon: "🎨", title: "自动化同步数据库", details: "每日自动化检查并更新" },
     ],
-    nav: ["overview", "annual", "column", "follow"],
+    nav: ["overview", "column", "category", "tag", "annual", "follow"],
     socialLinks: {
       github: "https://github.com/TeaTools/auto-sync-blog",
       // discord: "/",
