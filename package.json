@@ -8,7 +8,7 @@
     "lint:fix": "eslint --fix",
     "sync:blog": "node works/index.js",
     "dev:blog": "vitepress dev docs",
-    "build:blog": "vitepress build docs --base /auto-sync-blog"
+    "build:blog": "vitepress build docs --base /auto-sync-blog/"
   },
   "author": "https://github.com/TeaTools",
   "repository": "https://github.com/TeaTools/auto-sync-blog",
