@@ -3,11 +3,11 @@ export default {
   blog: {
     title: "每日掘金",
     description: "专注于发掘站内优质创作者和优质内容",
-    logo: "",
-    siteName: "blog.miyuefe.cn",
+    logo: "https://p3-passport.byteacctimg.com/img/user-avatar/b72e991ee9b1c9bdca7b2bd4c8dc78a8~300x300.image",
+    siteName: "tea.juejindev.com",
     head: [],
     keywords: ["前端", "后端", "移动端", "每日掘金", "酱酱的下午茶", "掘金", "掘金酱"],
-    author: "MiyueFE"
+    author: "TeaTools,MiyueFE"
   },
 
   // vite press 构建配置
@@ -18,7 +18,7 @@ export default {
     image: "https://vitepress.dev/vitepress-logo-large.webp",
     actions: [
       { theme: "brand", text: "开始阅读", link: "/overview/index" },
-      { theme: "alt", text: "关注掘金", link: "https://miyuefe.cn" },
+      { theme: "alt", text: "关注掘金", link: "https://juejin.cn/user/2819602825362840" },
     ],
     features: [
       { icon: "🎈", title: "博客平台小助手", details: "同步一流技术社区专属文章" },
@@ -27,18 +27,18 @@ export default {
     ],
     nav: ["overview", "annual", "column", "follow"],
     socialLinks: {
-      github: "https://github.com/miyuesc",
-      discord: "/",
+      github: "https://github.com/TeaTools/auto-sync-blog",
+      // discord: "/",
       // facebook: "",
       // linkedin: "",
-      twitter: "/",
-      youtube: "/",
+      // twitter: "/",
+      // youtube: "/",
     },
   },
 
   // 掘金
   juejin: {
-    userId: "747323639208391",
+    userId: "2819602825362840",
     columnsIds: [],
   },
 }
