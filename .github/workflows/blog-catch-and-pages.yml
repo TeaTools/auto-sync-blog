@@ -22,23 +22,19 @@ jobs:
         with:
           node-version: "18.x"
 
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
       - name: Clean up
         run: |
           rm -rf package-lock.json
           rm -rf node_modules
 
       - name: Install dependencies
-        run: pnpm install --force
+        run: npm install
 
       - name: Sync juejin blog
         run: npm run sync:blog
 
       - name: Build
-        run: npm run sync:blog
+        run: npm run build:blog
 
       # 发布
       - name: Deploy
