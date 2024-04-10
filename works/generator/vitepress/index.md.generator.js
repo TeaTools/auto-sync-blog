@@ -1,5 +1,5 @@
 import { replaceKeywords } from "../../utils/template-process.js"
-import mdTemplate, { actionTemplate, featureTemplate } from "../../template/vitepress/vitepress.index.md.js"
+import { homeTemplate, actionTemplate, featureTemplate } from "../../template/index.js"
 import configurations from "../../../configurations.js"
 import { mkDir } from "../../utils/file-process.js"
 import { DOCS_FILE_PATH } from "../../../build/config.base.js"
@@ -39,7 +39,7 @@ export const processVitePressIndexMD = async () => {
     }
   }
 
-  const md = replaceKeywords(mdTemplate, replacer)
+  const md = replaceKeywords(homeTemplate, replacer)
 
   await mkDir(DOCS_FILE_PATH)
   writeFileSync(`${DOCS_FILE_PATH}/index.md`, md, (err) => {
