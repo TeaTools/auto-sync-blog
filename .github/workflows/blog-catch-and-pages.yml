@@ -30,9 +30,10 @@ jobs:
         run: |
           rm -rf package-lock.json
           rm -rf node_modules
+          pnpm config set registry https://registry.npmmirror.com
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --force
 
       - name: Sync juejin blog
         run: npm run sync:blog
