@@ -4,6 +4,7 @@ public/z-test/*
 
 .github/*
 
+# IDE
 .idea
 .vscode
 
@@ -97,7 +98,7 @@ dist
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 
-# vuepress build output
+# vitepress build output
 .vuepress/dist
 
 # Serverless directories
