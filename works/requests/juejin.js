@@ -69,46 +69,22 @@ export const getColumnArticles = async (columnId) => {
   return await commonPollingRequest(COLUMN_API, getColumnsParams(columnId))
 }
 // 所有专栏与文章列表
-export const processColumnArticleMap = async (columnList, callback) => {
+export const processColumnArticleMap = async (columnList, articlesMap, callback) => {
   const columnMap = new Map()
 
   for (let i = 0; i < columnList.length; i++) {
-    const { column_version, column_id } = columnList[i]
+    const { column, column_version, column_id } = columnList[i]
 
     if (!column_version || columnMap.get(column_id)) continue
 
-    const columnArticleList = await getColumnArticles(column_id)
+    const { content_sort_ids = [] } = column
+
+    const columnArticleList = content_sort_ids.map((id) => articlesMap.get(id))
 
     callback && callback(columnArticleList)
 
-    columnMap.set(column_id, columnArticleList)
+    columnMap.set(column_id, { articles: columnArticleList, columnInfo: columnList[i] })
   }
 
   return columnMap
-}
-
-// 处理专栏文章与未收录专栏文章
-export const processArticlesAndColumns = async (userId) => {
-  const articles = await getUserArticles(userId)
-  const columns = await getUserColumns(userId)
-  let unColumnArticles = [...articles]
-
-  const removeUnColumnArticle = (columnArticleList) => {
-    for (let idx = 0; idx < columnArticleList.length; idx++) {
-      const { article_id } = columnArticleList[idx]
-      if (!article_id) continue
-
-      const removeIndex = unColumnArticles.findIndex((item) => item.article_id === article_id)
-      if (removeIndex > -1) {
-        unColumnArticles.splice(removeIndex, 1)
-      }
-    }
-  }
-
-  const columnMap = processColumnArticleMap(columns, removeUnColumnArticle)
-
-  return {
-    columnMap,
-    articles,
-  }
 }
