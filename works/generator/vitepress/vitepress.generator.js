@@ -2,8 +2,8 @@ import configurations from "../../../configurations.js"
 import { vitePressConfigJs } from "../../template/index.js"
 import { JUEJIN_USER_URL } from "../../website/juejin.js"
 import { replaceKeywords } from "../../utils/template-process.js"
-import { writeFileSync } from "fs"
-import { CONFIG_FILE_PATH } from "../../../build/config.base.js"
+import { writeFileSync, cp } from "fs"
+import { CONFIG_FILE_PATH, THEME_FILE_PATH, THEME_SET_FILE_PATH } from "../../../build/config.base.js"
 import { mkDir } from "../../utils/file-process.js"
 
 const NAV_LINKS = {
@@ -97,5 +97,12 @@ export const processVitePressConfig = async (annualList) => {
   writeFileSync(`${CONFIG_FILE_PATH}/index.js`, config, (err) => {
     if (err) throw err
     console.log("vitepress config 写入成功~")
+  })
+}
+
+export const processVitePressTheme = async () => {
+  await cp(THEME_SET_FILE_PATH, THEME_FILE_PATH, { recursive: true }, (err) => {
+    if (err) throw err
+    console.log("vitepress theme 复制成功~")
   })
 }
