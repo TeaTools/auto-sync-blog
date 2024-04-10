@@ -5,6 +5,7 @@ import { replaceKeywords } from "../../utils/template-process.js"
 import { writeFileSync, cp } from "fs"
 import { CONFIG_FILE_PATH, THEME_FILE_PATH, THEME_SET_FILE_PATH } from "../../../build/config.base.js"
 import { mkDir } from "../../utils/file-process.js"
+import { getArticlesAndColumnsMap } from "../../store/index.js"
 
 const NAV_LINKS = {
   overview: {
@@ -74,8 +75,14 @@ const processPressHead = (blog) => {
   return head
 }
 
-export const processVitePressConfig = async (annualList) => {
+export const processVitePressConfig = async (annualList = []) => {
   const { press, blog, juejin } = configurations
+
+  const { yearCollection} = await getArticlesAndColumnsMap()
+
+  for (const [year] of yearCollection) {
+    annualList.push({ text: `${year}`, link: `/years/${year}`})
+  }
 
   const replacer = (key) => {
     if (key === "nav") {

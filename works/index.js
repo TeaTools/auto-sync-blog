@@ -1,18 +1,15 @@
 import { processColumnsOverview, processVitePressConfig, processVitePressTheme } from "./generator/index.js"
-import { processVitePressIndexMD } from "./generator/index.js"
-import { processOverviewMD } from "./generator/index.js"
+import { processVitePressIndexMD, processOverviewMD, processYearsPage } from "./generator/index.js"
 
-//
+// 注意生成顺序
 await processVitePressIndexMD()
 
 await processOverviewMD()
 
 await processColumnsOverview()
 
-// 生成 vitepress 配置
-await processVitePressConfig([
-  { text: 'Item A', link: '/item-1' },
-  { text: 'Item B', link: '/item-2' },
-  { text: 'Item C', link: '/item-3' }
-])
+await processYearsPage()
+
+// 生成 vite press 配置
+await processVitePressConfig()
 await processVitePressTheme()

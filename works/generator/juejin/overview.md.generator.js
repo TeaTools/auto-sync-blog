@@ -2,8 +2,8 @@ import { OVERVIEW_FILE_PATH } from "../../../build/config.base.js"
 import { mkdirp } from "mkdirp"
 import { writeFileSync } from "fs"
 import { insertString } from "../../utils/common.js"
-import { getArticles, getArticlesAndColumnsMap } from "../../store/index.js"
-import { article2MD, overviewTableMD } from "./utils.js"
+import { getArticlesAndColumnsMap } from "../../store/index.js"
+import { overviewTableMD } from "./utils.js"
 
 export const processArticleTimesCollection = (articleList = []) => {
   const timesCollectionMap = new Map()
@@ -16,7 +16,7 @@ export const processArticleTimesCollection = (articleList = []) => {
     }
 
     let { str, count } = strMap
-    str += article2MD(articleInfo)
+    str += articleInfo.mdListString
     count++
     strMap = { str, count }
 
@@ -39,7 +39,7 @@ export const processOverviewMD = async () => {
   const { articles, yearMonthCollection, yearCollection } = await getArticlesAndColumnsMap()
   const timesCollectionMap = await processArticleTimesCollection(articles)
 
-  let md = `# 累计发布 ${articles.length}`
+  let md = `# 文章总览\n\n## 累计发布 ${articles.length}`
 
   md += overviewTableMD(yearCollection, yearMonthCollection)
 
