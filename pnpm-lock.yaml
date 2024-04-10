@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@nolebase/vitepress-plugin-enhanced-readabilities':
     specifier: 1.22.4
-    version: 1.22.4(vitepress@1.0.2)
+    version: 1.22.4(vitepress@1.0.0-rc.44)
   axios:
     specifier: 1.2.6
     version: 1.2.6
@@ -15,8 +15,8 @@ dependencies:
     specifier: ^3.0.1
     version: 3.0.1
   vitepress:
-    specifier: 1.0.2
-    version: 1.0.2(@algolia/client-search@4.23.2)(axios@1.2.6)(search-insights@2.13.0)
+    specifier: 1.0.0-rc.44
+    version: 1.0.0-rc.44(@algolia/client-search@4.23.2)(axios@1.2.6)(search-insights@2.13.0)
   vue:
     specifier: ^3.4.21
     version: 3.4.21
@@ -551,12 +551,12 @@ packages:
       fastq: 1.17.1
     dev: true
 
-  /@nolebase/vitepress-plugin-enhanced-readabilities@1.22.4(vitepress@1.0.2):
+  /@nolebase/vitepress-plugin-enhanced-readabilities@1.22.4(vitepress@1.0.0-rc.44):
     resolution: {integrity: sha512-4OusbDlwwFRDsPEGHeYyyBMY1EpLFUhPPPqT33QB4XMHCsXemROJegh0lkTnu7t1Y0qW2oF9C9bIXg2CTSYqXQ==}
     peerDependencies:
       vitepress: '>=1.0.0-rc.42'
     dependencies:
-      vitepress: 1.0.2(@algolia/client-search@4.23.2)(axios@1.2.6)(search-insights@2.13.0)
+      vitepress: 1.0.0-rc.44(@algolia/client-search@4.23.2)(axios@1.2.6)(search-insights@2.13.0)
     dev: false
 
   /@pkgr/core@0.1.1:
@@ -1799,12 +1799,12 @@ packages:
       fsevents: 2.3.3
     dev: false
 
-  /vitepress@1.0.2(@algolia/client-search@4.23.2)(axios@1.2.6)(search-insights@2.13.0):
-    resolution: {integrity: sha512-bEj9yTEdWyewJFOhEREZF+mXuAgOq27etuJZT6DZSp+J3XpQstXMJc5piSVwhZBtuj8OfA0iXy+jdP1c71KMYQ==}
+  /vitepress@1.0.0-rc.44(@algolia/client-search@4.23.2)(axios@1.2.6)(search-insights@2.13.0):
+    resolution: {integrity: sha512-tO5taxGI7fSpBK1D8zrZTyJJERlyU9nnt0jHSt3fywfq3VKn977Hg0wUuTkEmwXlFYwuW26+6+3xorf4nD3XvA==}
     hasBin: true
     peerDependencies:
-      markdown-it-mathjax3: ^4
-      postcss: ^8
+      markdown-it-mathjax3: ^4.3.2
+      postcss: ^8.4.35
     peerDependenciesMeta:
       markdown-it-mathjax3:
         optional: true
