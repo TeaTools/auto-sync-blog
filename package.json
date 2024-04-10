@@ -17,7 +17,7 @@
     "@nolebase/vitepress-plugin-enhanced-readabilities": "1.22.4",
     "axios": "1.2.6",
     "mkdirp": "^3.0.1",
-    "vitepress": "1.0.2",
+    "vitepress": "1.0.0-rc.44",
     "vue": "^3.4.21"
   },
   "devDependencies": {
