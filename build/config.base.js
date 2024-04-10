@@ -27,3 +27,5 @@ export const DOCS_FILE_PATH = "docs/src";
 export const OVERVIEW_FILE_PATH = "docs/src/overview";
 // 专栏
 export const COLUMNS_FILE_PATH = "docs/src/columns";
+// 年度
+export const YEARS_FILE_PATH = "docs/src/years";

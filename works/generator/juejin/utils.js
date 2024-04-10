@@ -19,7 +19,7 @@ export const getArticleInfo = (article) => {
 
   const dateMap = dateFormatter(parseInt(ctime + "000"))
 
-  return {
+  const articleInfo =  {
     cover_image,
     article_id,
     title,
@@ -33,6 +33,11 @@ export const getArticleInfo = (article) => {
     collect_count,
     tags: tags.map((t) => t.tag_name),
   }
+
+  articleInfo.mdListString = article2MD(articleInfo)
+  articleInfo.mdString = article2MD(articleInfo, false)
+
+  return articleInfo
 }
 
 export function article2MD(articleBean, useList = true) {
@@ -67,8 +72,6 @@ export function overviewTableMD(yearCollMap = new Map, yearMonthCollMap, year) {
       .join("|")}|`
     return tableMD + tableRow
   }
-
-  console.log(yearMonthCollMap)
 
   let tableRows = ''
   yearCollMap.forEach((yearColl, k) => {

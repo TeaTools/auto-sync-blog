@@ -2,7 +2,6 @@ import { getArticlesAndColumnsMap } from "../../store/index.js"
 import { mkdirp } from "mkdirp"
 import { COLUMNS_FILE_PATH } from "../../../build/config.base.js"
 import { writeFileSync } from "fs"
-import { article2MD } from "./utils.js"
 
 export const processColumnsOverview = async () => {
   await mkdirp(COLUMNS_FILE_PATH)
@@ -31,8 +30,12 @@ export const processColumnsOverview = async () => {
 export const processColumnDetail = async (column, articles) => {
   let md = `# ${column.column_version.title}`
 
+  md += `\n\n· ${column.column.article_cnt} 文章 · ${column.column.follow_cnt} 订阅 ·`
+
+  md += `\n## 文章列表\n\n`
+
   articles && articles.forEach(article => {
-    md += `\n${article2MD(article.formatInfo, false)}`
+    md += `\n${article.formatInfo.mdString}`
   })
 
   await writeFileSync(`${COLUMNS_FILE_PATH}/${column.column_id}.md`, md, (err) => {

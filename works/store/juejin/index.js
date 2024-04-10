@@ -109,7 +109,7 @@ export const getArticlesAndColumnsMap = async () => {
 
   const columnMap = await processColumnArticleMap(columns, articlesMap, removeUnColumnArticle)
 
-  return (articlesAndColumnsMap = {
+  articlesAndColumnsMap = {
     articles,
     articlesMap,
     unColumnArticles,
@@ -117,5 +117,7 @@ export const getArticlesAndColumnsMap = async () => {
     columnMap,
     yearCollection,
     yearMonthCollection,
-  })
+  }
+
+  return articlesAndColumnsMap
 }
