@@ -16,7 +16,6 @@
   "dependencies": {
     "@nolebase/vitepress-plugin-enhanced-readabilities": "^1.22.4",
     "axios": "^1.6.7",
-    "medium-zoom": "^1.1.0",
     "mkdirp": "^3.0.1",
     "vitepress": "^1.1.0",
     "vue": "^3.4.21"

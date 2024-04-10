@@ -26,6 +26,11 @@ jobs:
         with:
           version: 8
 
+      - name: Clean up
+        run: |
+          rm -rf package-lock.json
+          rm -rf node_modules
+
       - name: Install dependencies
         run: pnpm install
 
