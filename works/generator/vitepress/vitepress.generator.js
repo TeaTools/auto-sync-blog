@@ -1,5 +1,5 @@
 import configurations from "../../../configurations.js"
-import vitePressConfig from "../../template/vitepress/vitepress.config.js"
+import { vitePressConfigJs } from "../../template/index.js"
 import { JUEJIN_USER_URL } from "../../website/juejin.js"
 import { replaceKeywords } from "../../utils/template-process.js"
 import { writeFileSync } from "fs"
@@ -86,7 +86,7 @@ export const processVitePressConfig = async (annualList) => {
     }
   }
 
-  const config = replaceKeywords(vitePressConfig, replacer)
+  const config = replaceKeywords(vitePressConfigJs, replacer)
 
   await mkDir(CONFIG_FILE_PATH)
 

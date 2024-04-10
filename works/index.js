@@ -1,6 +1,6 @@
-import { processVitePressConfig } from "./generator/vitepress/vitepress.generator.js"
-import { processVitePressIndexMD } from "./generator/vitepress/index.md.generator.js"
-import { processOverviewMD } from "./generator/juejin/overview.md.generator.js"
+import { processVitePressConfig } from "./generator/index.js"
+import { processVitePressIndexMD } from "./generator/index.js"
+import { processOverviewMD } from "./generator/index.js"
 
 
 await processVitePressConfig([

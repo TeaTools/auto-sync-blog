@@ -1,5 +1,5 @@
 // vitepress 主页 markdown 模板
-export default `---
+export const homeTemplate = `---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
