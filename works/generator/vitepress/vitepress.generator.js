@@ -4,7 +4,7 @@ import { JUEJIN_USER_URL } from "../../website/juejin.js"
 import { replaceKeywords } from "../../utils/template-process.js"
 import { writeFileSync, cp } from "fs"
 import { CONFIG_FILE_PATH, THEME_FILE_PATH, THEME_SET_FILE_PATH } from "../../../build/config.base.js"
-import { mkDir } from "../../utils/file-process.js"
+import { mkdirp } from "mkdirp"
 import { getArticlesAndColumnsMap } from "../../store/index.js"
 
 const NAV_LINKS = {
@@ -106,7 +106,7 @@ export const processVitePressConfig = async (annualList = []) => {
 
   const config = replaceKeywords(vitePressConfigJs, replacer)
 
-  await mkDir(CONFIG_FILE_PATH)
+  await mkdirp(CONFIG_FILE_PATH)
 
   // 重写该文档（appendFile 是追加并不存在就直接创建）
   writeFileSync(`${CONFIG_FILE_PATH}/index.js`, config, (err) => {
