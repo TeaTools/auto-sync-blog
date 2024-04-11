@@ -234,5 +234,6 @@ kbd {
 }
 .VPTeamMembers .avatar .avatar-img {
   height: 100%;
+  border-radius: 6px;
   object-fit: contain;
 }
