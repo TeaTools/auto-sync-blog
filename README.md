@@ -1,6 +1,6 @@
 ## 当前机制
 
-自动化执行任务: 获取掘金指定用户指定专栏的文章， 并将文章目录链接更新至GitHub pages
+自动化执行任务: 获取指定掘金创作者文章列表与专栏信息，生成按发布年月、专栏、分类等多个维度的统计信息
 
 自动化运行时间: 北京时间下午 `16:20` 左右
 
@@ -8,9 +8,11 @@
 
 项目名：[**自动化同步文章平台（auto-sync-blog）**](https://juejin.cn/post/7210387904748503095)
 
-作用：实现在写作平台（如掘金、CSDN、简书等）的每日能进行自动同步数据（文章标题和链接）；同时，对文章进行友好的分类，并实现更直观的浏览那些年写过的文章。（目前仅支持掘金平台的同步，其他还在开发。）
+作用：实现在写作平台（如掘金、CSDN、简书等）的每日能进行自动同步数据（文章标题和链接）；同时，对文章进行友好的分类，并实现更直观的浏览那些年写过的文章。
 
-涉及技术：**github actions**, **github pages**, **node**, **vuepress**
+（目前仅支持掘金平台的同步，其他还在开发。）
+
+涉及技术：**github actions**, **github pages**, **node**, **vitepress**
 
 ## 部署流程
 
@@ -21,107 +23,62 @@
 
     | Name                 | Value                                                         | Required |
     | -------------------- | ------------------------------------------------------------- | -------- |
-    | JUEJIN_USER_ID       | 掘金用户id                                                    | 是       |
-    | JUEJIN_COLUMN_ID     | 掘金专栏id                                                    | 可选     |
     | PRESS_TOKEN_TEA_BLOG | GitHub Personal access tokens，用户推送仓库，同步GitHub pages | 是       |
 
 3. 更新仓库的 actions 权限：Settings -> Secret -> Actions -> General -> Workflow permissions -> 勾选 Read and write permissions -> Save.
-4. 仓库 -> Actions, 检查 Workflows 并启用。
-5. Settings -> Pages -> Branch -> gh-pages （如果不出现 gh-pages 分支，重复第四步并检查是否已经完成。）-> Save 
+4. 仓库 -> `configurations.js` 文件中替换个人信息并提交（该文件禁止随意 PR）。
+5. 仓库 -> Actions, 检查 Workflows 并启用。
+6. 更新仓库 Page 服务：Settings -> Pages -> Branch -> gh-pages （如果不出现 gh-pages 分支，重复第四步并检查是否已经完成。）-> Save 
 
-### 本地部署流程（Be Developer）
+### 本地开发流程（Be Developer）
 
-1. 执行主入口，生成 vuepress 相关配置（其中 juejin_user_id 是对应掘金个人首页的user/后面带的一串数字 ）
-```cmd
-node .\main.js --juejin_user_id=2819602825362840 --juejin_column_id=7140398633710518302
-```
-2. 安装依赖
+1. 安装依赖
 ```cmd
 npm install
 ```
-3. 启动项目
+
+2. 更新 configurations.js
+
+3. 执行主入口，生成 vitepress 相关配置与 markdown 文件
 ```cmd
-npm start
+npm run sync:blog
 ```
-4. 访问地址
+
+4. 启动项目
+```cmd
+npm run dev:blog
+```
+
+5. 访问地址
 ```http
-http://localhost:8080/
+http://localhost:5173/
 ```
 
 ## 目录结构
 
 ```cmd
- ./
-├─LICENSE
-├─main.js // 主入口
-├─package-lock.json
-├─package.json // 相关依赖和启动方式
-├─Q&A.md // 问题统计与解决方法
-├─README.md // 介绍 
-├─public // 主要部分
-|   ├─z-test // 测试
-|   |   └测试数据.js
-|   ├─template // 模板
-|   |    ├─vuepress // 生成 vuepress 相关配置的模板
-|   |    |    ├─config-template.js
-|   |    |    └readme-template.md
-|   |    ├─column // 生成专栏 markdown 文件的模板
-|   |    |   ├─article-template.md
-|   |    |   ├─hot-template.md
-|   |    |   └my-template.md
-|   |    ├─article // 生成时间分类 markdown 文件的模板
-|   |    |    ├─all-template.md
-|   |    |    ├─year-month-template.md
-|   |    |    └year-template.md
-|   ├─src // 主要部分的主入口
-|   |  ├─work.js // 主要工作模块
-|   |  ├─generate // 生成模块
-|   |  |    ├─generate.js
-|   |  |    ├─vuepress
-|   |  |    |    └utils.js
-|   |  |    ├─juejin
-|   |  |    |   └utils.js
-|   |  |    ├─common
-|   |  |    |   ├─base.js
-|   |  |    |   └FileUtils.js
-|   |  ├─details // 解析模块
-|   |  |    ├─details.js
-|   |  |    ├─vuepress
-|   |  |    |    ├─base.js
-|   |  |    |    └utils.js
-|   |  |    ├─juejin
-|   |  |    |   ├─base.js
-|   |  |    |   └utils.js
-|   |  ├─catch // 获取模块
-|   |  |   ├─catch.js
-|   |  |   ├─juejin
-|   |  |   |   ├─base.js
-|   |  |   |   └utils.js
-|   ├─common // 公共方法
-|   |   ├─cover.jpg
-|   |   ├─utils
-|   |   |   ├─DateUtils.js
-|   |   |   ├─Http.js
-|   |   |   └minimist.js
-├─docs // 以下是本地执行 node 后，会生成的文件夹和文件
-|  ├─README.md // vuepress 的相关配置
-|  ├─sort // 主要 markdown 文件
-|  |  ├─all.md
-|  |  ├─column // 专栏分类
-|  |  |   ├─我的专栏.md
-|  |  |   ├─推荐专栏.md
-|  |  |   ├─my
-|  |  |   | ├─未分类.md
-|  |  |   | └茶博客.md
-|  |  |   ├─hot
-|  |  |   |  └茶博客.md
-|  |  ├─2023 // 时间分类
-|  |  |  ├─2023.md
-|  |  |  └202304.md
-|  ├─.vuepress // vuepress 的相关配置
-|  |     ├─config.js
-|  |     ├─public
-|  |     |   └cover.jpg
+./
+├─ LICENSE
+├─ package.json
+├─ package-lock.json
+├─ Q&A.md        // 问题统计与解决方法
+├─ README.md
+├─ README_EN.md
+├─ build         // 构建相关
+|   └  config.base.js   // 自动生成文件的目录配置
+├─ docs          // 自动生成的 vitepress 内容
+|   ├─ .vitepress 
+|   |    |    ├─ config // 由 vitepress.config.generator 生成的内容
+|   |    |    └  theme  // 复制的 theme 样式文件与插件配置
+|   └  src              // 自动生成的所有统计页面 markdown 文件
+├─ works         // 核心部分
+|   ├─ apis      // http api 请求地址
+|   ├─ generator // 文件生成
+|   ├─ requests  // 网络请求部分
+|   ├─ store     // 全局数据处理与缓存
+|   ├─ template  // 各类模板文件
+|   ├─ utils     // 工具函数
+|   ├─ website   // 博客内生成的外链地址的配置信息
 ```
 
 ## 后续开发计划
@@ -129,9 +86,8 @@ http://localhost:8080/
 1. 实现多个专栏（指定多个专栏，指定用户的所有专栏）
 2. 实现收藏分类（指定收藏集）
 3. 实现邮箱订阅（有更新给订阅的邮箱发送）
-4. 实现更灵活的 vuepress 配置文件（更方便修改等）
-5. 实现支持更多平台的同步（如CSDN、简书等）
-6. 实现更多便捷配置（百度统计，天气，音乐）
+4. 实现支持更多平台的同步（如CSDN、简书等）
+5. 实现更多便捷配置（百度统计，天气，音乐）
 
 
 
@@ -184,4 +140,4 @@ http://localhost:8080/
 <a title="Q&A" href="Q&A.md">Question & Answer</a>
 
 ## License
-auto-sync-blog is under the [GPL license](LICENSE).
+auto-sync-blog is under the [MIT license](LICENSE).
