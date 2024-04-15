@@ -6,7 +6,6 @@ import {
   NolebaseEnhancedReadabilitiesScreenMenu,
 } from '@nolebase/vitepress-plugin-enhanced-readabilities'
 
-import CodeGroup from '@tea-tools/components/CodeGroup.vue'
 
 import './main.css'
 import '@nolebase/vitepress-plugin-enhanced-readabilities/dist/style.css'
@@ -21,9 +20,6 @@ export default {
       'nav-screen-content-after': () =>
         h(NolebaseEnhancedReadabilitiesScreenMenu),
     })
-  },
-  enhanceApp({ app }) {
-    app.component('CodeGroup', CodeGroup)
   },
   setup() {
     // setup language
