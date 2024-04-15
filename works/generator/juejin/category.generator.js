@@ -5,7 +5,7 @@ import { writeFileSync } from "fs"
 
 export const processCategoriesOverview = async () => {
   await mkdirp(CATEGORIES_FILE_PATH)
-  
+
   const { categoryCollection } = await getArticlesAndColumnsMap()
 
   let categoryMD = `# 我的分类`
@@ -21,10 +21,9 @@ export const processCategoriesOverview = async () => {
     await processCategoryDetail(categoryColl, articles)
   }
 
-  await writeFileSync(`${CATEGORIES_FILE_PATH}/index.md`, categoryMD, (err) => {
-    if (err) throw err
-    console.log("Category overview 写入成功~")
-  })
+  await writeFileSync(`${CATEGORIES_FILE_PATH}/index.md`, categoryMD)
+
+  console.log("Category overview 写入成功~")
 }
 
 export const processCategoryDetail = async (categoryColl, articles) => {
@@ -40,8 +39,7 @@ export const processCategoryDetail = async (categoryColl, articles) => {
     md += `\n${article.formatInfo.mdString}`
   })
 
-  await writeFileSync(`${CATEGORIES_FILE_PATH}/${categoryColl.info.category_id}.md`, md, (err) => {
-    if (err) throw err
-    console.log(`${categoryColl.info.category_name} 写入成功~`)
-  })
+  await writeFileSync(`${CATEGORIES_FILE_PATH}/${categoryColl.info.category_id}.md`, md)
+
+  console.log(`${categoryColl.info.category_name} 写入成功~`)
 }

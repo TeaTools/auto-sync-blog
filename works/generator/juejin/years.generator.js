@@ -30,4 +30,6 @@ export const processSingleYear = async (yearCollection, yearMonthCollection, yea
   }
 
   await writeFileSync(`${YEARS_FILE_PATH}/${year}.md`, md)
+
+  console.log(`${year}.md 写入成功~`)
 }

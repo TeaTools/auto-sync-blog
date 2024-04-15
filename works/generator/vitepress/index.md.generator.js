@@ -38,8 +38,7 @@ export const processVitePressIndexMD = async () => {
 
   await mkdirp(DOCS_FILE_PATH)
 
-  writeFileSync(`${DOCS_FILE_PATH}/index.md`, md, (err) => {
-    if (err) throw err
-    console.log("vitepress index.md 写入成功~")
-  })
+  await writeFileSync(`${DOCS_FILE_PATH}/index.md`, md)
+
+  console.log("vitepress index.md 写入成功~")
 }

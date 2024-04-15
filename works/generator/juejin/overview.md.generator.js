@@ -47,8 +47,7 @@ export const processOverviewMD = async () => {
 
   await mkdirp(OVERVIEW_FILE_PATH)
 
-  writeFileSync(`${OVERVIEW_FILE_PATH}/index.md`, md, (err) => {
-    if (err) throw err
-    console.log("overview 写入成功~")
-  })
+  await writeFileSync(`${OVERVIEW_FILE_PATH}/index.md`, md)
+
+  console.log("overview 写入成功~")
 }
