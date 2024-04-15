@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as t,ag as a}from"./chunks/framework.C7RikI5Z.js";const k=JSON.parse('{"title":"2022 年度概览","description":"","frontmatter":{},"headers":[],"relativePath":"years/2022.md","filePath":"years/2022.md"}'),c={name:"years/2022.md"},r=a("",714),d=[r];function p(n,i,l,s,h,u){return t(),o("div",null,d)}const j=e(c,[["render",p]]);export{k as __pageData,j as default};
