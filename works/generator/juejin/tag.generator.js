@@ -21,10 +21,9 @@ export const processTagsOverview = async () => {
     await processTagDetail(tagColl, articles)
   }
 
-  await writeFileSync(`${TAGS_FILE_PATH}/index.md`, tagMD, (err) => {
-    if (err) throw err
-    console.log("Tags overview 写入成功~")
-  })
+  await writeFileSync(`${TAGS_FILE_PATH}/index.md`, tagMD)
+
+  console.log("Tags overview 写入成功~")
 }
 
 export const processTagDetail = async (tagColl, articles) => {
@@ -40,8 +39,7 @@ export const processTagDetail = async (tagColl, articles) => {
     md += `\n${article.formatInfo.mdString}`
   })
 
-  await writeFileSync(`${TAGS_FILE_PATH}/${tagColl.info.tag_id}.md`, md, (err) => {
-    if (err) throw err
-    console.log(`${tagColl.info.tag_name} 写入成功~`)
-  })
+  await writeFileSync(`${TAGS_FILE_PATH}/${tagColl.info.tag_id}.md`, md)
+
+  console.log(`${tagColl.info.tag_name} 写入成功~`)
 }

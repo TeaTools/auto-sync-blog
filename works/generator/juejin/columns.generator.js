@@ -21,10 +21,9 @@ export const processColumnsOverview = async () => {
     await processColumnDetail(columnInfo, articles)
   }
 
-  await writeFileSync(`${COLUMNS_FILE_PATH}/index.md`, columnMd, (err) => {
-    if (err) throw err
-    console.log("overview 写入成功~")
-  })
+  await writeFileSync(`${COLUMNS_FILE_PATH}/index.md`, columnMd)
+
+  console.log("overview.md 写入成功~")
 }
 
 export const processColumnDetail = async (column, articles) => {
@@ -40,8 +39,7 @@ export const processColumnDetail = async (column, articles) => {
     md += `\n${article.formatInfo.mdString}`
   })
 
-  await writeFileSync(`${COLUMNS_FILE_PATH}/${column.column_id}.md`, md, (err) => {
-    if (err) throw err
-    console.log(`${column.column_version.title} 写入成功~`)
-  })
+  await writeFileSync(`${COLUMNS_FILE_PATH}/${column.column_id}.md`, md)
+
+  console.log(`${column.column_version.title} 写入成功~`)
 }
