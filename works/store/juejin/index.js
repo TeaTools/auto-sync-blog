@@ -3,8 +3,11 @@ import configurations from "../../../configurations.js"
 import { getArticleInfo } from "../../generator/juejin/utils.js"
 
 let articles = null
+let columns = null
 let yearCollection = new Map()
 let yearMonthCollection = new Map()
+let categoryCollection = new Map()
+let tagCollection = new Map()
 
 export const setArticles = async (newArticles = [], useSort = false) => {
   yearCollection.clear()
@@ -23,9 +26,27 @@ export const setArticles = async (newArticles = [], useSort = false) => {
     if (!yearCollection.get(YY)) {
       yearCollection.set(YY, { count: 0, articles: [] })
     }
-    const coll = yearCollection.get(YY)
-    coll.count += 1
-    coll.articles.push(article)
+    const yearColl = yearCollection.get(YY)
+    yearColl.count += 1
+    yearColl.articles.push(article)
+
+    const {category, tags} = article
+
+    if (!categoryCollection.get(category.category_id)) {
+      categoryCollection.set(category.category_id, { info: category, count: 0, articles: [] })
+    }
+    const categoryColl = categoryCollection.get(category.category_id)
+    categoryColl.count += 1
+    categoryColl.articles.push(article)
+
+    for (const tag of tags) {
+      if (!tagCollection.get(tag.tag_id)) {
+        tagCollection.set(tag.tag_id, { info: tag, count: 0, articles: [] })
+      }
+      const tagColl = tagCollection.get(tag.tag_id)
+      tagColl.count += 1
+      tagColl.articles.push(article)
+    }
 
     article.formatInfo = formatInfo
   })
@@ -46,8 +67,6 @@ export const getArticles = async () => {
   return articles
 }
 
-let columns = null
-
 export const setColumns = async (newColumns) => {
   return (columns = newColumns)
 }
@@ -57,8 +76,6 @@ export const getColumns = async () => {
   }
   return columns
 }
-
-let articlesAndColumnsMap = { articles, columns }
 
 // 所有专栏与文章列表
 export const processColumnArticleMap = async (columnList, articlesMap, callback) => {
@@ -81,10 +98,7 @@ export const processColumnArticleMap = async (columnList, articlesMap, callback)
   return columnMap
 }
 
-export const setArticlesAndColumnsMap = async (key, value) => {
-  articlesAndColumnsMap[key] = value
-  return articlesAndColumnsMap
-}
+// 数据组合
 export const getArticlesAndColumnsMap = async () => {
   const articles = await getArticles()
   const columns = await getColumns()
@@ -109,7 +123,7 @@ export const getArticlesAndColumnsMap = async () => {
 
   const columnMap = await processColumnArticleMap(columns, articlesMap, removeUnColumnArticle)
 
-  articlesAndColumnsMap = {
+  return {
     articles,
     articlesMap,
     unColumnArticles,
@@ -117,7 +131,7 @@ export const getArticlesAndColumnsMap = async () => {
     columnMap,
     yearCollection,
     yearMonthCollection,
+    tagCollection,
+    categoryCollection,
   }
-
-  return articlesAndColumnsMap
 }

@@ -30,6 +30,8 @@ export const processColumnsOverview = async () => {
 export const processColumnDetail = async (column, articles) => {
   let md = `# ${column.column_version.title}`
 
+  md += `\n## 数据统计\n\n`
+
   md += `\n\n· ${column.column.article_cnt} 文章 · ${column.column.follow_cnt} 订阅 ·`
 
   md += `\n## 文章列表\n\n`

@@ -1,5 +1,5 @@
 import { replaceKeywords } from "../../utils/template-process.js"
-import { homeTemplate, actionTemplate, featureTemplate } from "../../template/index.js"
+import { homeTemplate, actionTemplate, featureTemplate, teamTemplate } from "../../template/index.js"
 import configurations from "../../../configurations.js"
 import { mkdirp } from "mkdirp"
 import { DOCS_FILE_PATH } from "../../../build/config.base.js"
@@ -30,7 +30,11 @@ export const processVitePressIndexMD = async () => {
     }
   }
 
-  const md = replaceKeywords(homeTemplate, replacer)
+  let md = replaceKeywords(homeTemplate, replacer)
+
+  if (press.showTeam && press.members?.length) {
+    md += replaceKeywords(teamTemplate, (key) => (key === "members" ? JSON.stringify(press.members) : ""))
+  }
 
   await mkdirp(DOCS_FILE_PATH)
 

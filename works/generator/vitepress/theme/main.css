@@ -77,11 +77,7 @@ html.dark:root {
   --vp-c-mute-dark: var(--vp-c-black-lighter);
   --vp-c-mute-darker: var(--vp-c-black-darker);
 
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    78deg,
-    var(--c-blue) 30%,
-    var(--c-green-light)
-  );
+  --vp-home-hero-name-background: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
 }
 
 /**
@@ -103,11 +99,7 @@ html.dark:root {
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(
-    292deg,
-    var(--c-green-dark) 50%,
-    var(--c-green-light)
-  );
+  --vp-home-hero-name-background: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
   --vp-home-hero-image-background-image: linear-gradient(
     15deg,
     var(--c-green-light) 65%,
@@ -235,4 +227,13 @@ kbd {
 }
 .vp-doc a:hover {
   text-decoration: underline;
+}
+
+.VPTeamMembers .avatar {
+  border-radius: 6px;
+}
+.VPTeamMembers .avatar .avatar-img {
+  height: 100%;
+  border-radius: 6px;
+  object-fit: contain;
 }

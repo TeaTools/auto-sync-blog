@@ -1,6 +1,5 @@
 // vitepress 主页 markdown 模板
 export const homeTemplate = `---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
@@ -11,6 +10,7 @@ hero:
   actions: {{ actions }}
 
 features: {{ features }}
+
 ---
 `
 
@@ -22,3 +22,19 @@ export const actionTemplate = `
 export const featureTemplate = `
   - title: {{ title }}
     details: {{ details }}`
+
+export const teamTemplate = `
+<script setup>
+import { VPTeamMembers, VPTeamPageTitle } from 'vitepress/theme'
+
+const members = {{ members }}
+</script>
+
+<VPTeamPageTitle>
+  <template #title>
+    Our Team
+  </template>
+</VPTeamPageTitle>
+
+<VPTeamMembers size="small" :members="members" />
+`
