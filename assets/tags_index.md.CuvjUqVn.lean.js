@@ -1,1 +1,0 @@
-import{_ as a,c as o,o as e,ag as t}from"./chunks/framework.ekniyEEX.js";const k=JSON.parse('{"title":"我的标签","description":"","frontmatter":{},"headers":[],"relativePath":"tags/index.md","filePath":"tags/index.md"}'),l={name:"tags/index.md"},h=t("",111),r=[h];function c(u,b,i,s,n,q){return e(),o("div",null,r)}const p=a(l,[["render",c]]);export{k as __pageData,p as default};
