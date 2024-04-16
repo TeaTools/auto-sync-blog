@@ -17,9 +17,9 @@ export const get = async (url, params) => {
 export const post = async (url, data) => {
   try {
     return await axios.post(url, data, {
-      "headers": {
+      headers: {
         "Content-Type": "application/json",
-      }
+      },
     })
   } catch (e) {
     console.log("Get " + url + " 请求异常", e)

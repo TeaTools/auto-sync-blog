@@ -100,11 +100,7 @@ html.dark:root {
 :root {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
-  --vp-home-hero-image-background-image: linear-gradient(
-    15deg,
-    var(--c-green-light) 65%,
-    var(--c-blue) 30%
-  );
+  --vp-home-hero-image-background-image: linear-gradient(15deg, var(--c-green-light) 65%, var(--c-blue) 30%);
   --vp-home-hero-image-filter: blur(40px);
 }
 
@@ -167,8 +163,7 @@ html.dark .DocSearch-Modal {
   --docsearch-hit-shadow: none;
   --docsearch-hit-background: var(--vp-c-black-light);
   --docsearch-footer-background: var(--vp-c-black-light);
-  --docsearch-footer-shadow: inset 0 1px 0 0 rgba(73, 76, 106, 0.5),
-    0 -4px 8px 0 rgba(0, 0, 0, 0.2);
+  --docsearch-footer-shadow: inset 0 1px 0 0 rgba(73, 76, 106, 0.5), 0 -4px 8px 0 rgba(0, 0, 0, 0.2);
   --docsearch-logo-color: var(--vp-c-brand);
   --docsearch-muted-color: var(--c-text-light-3);
 }
