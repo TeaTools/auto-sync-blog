@@ -11,7 +11,6 @@ export const processColumnsOverview = async () => {
   let columnMd = `# 我的专栏`
 
   for (const [columnId, column] of columnMap) {
-
     const { articles, columnInfo } = column
 
     columnMd += `\n\n## ${columnInfo.column_version.title}`
@@ -35,9 +34,10 @@ export const processColumnDetail = async (column, articles) => {
 
   md += `\n## 文章列表\n\n`
 
-  articles && articles.forEach(article => {
-    md += `\n${article.formatInfo.mdString}`
-  })
+  articles &&
+    articles.forEach((article) => {
+      md += `\n${article.formatInfo.mdString}`
+    })
 
   await writeFileSync(`${COLUMNS_FILE_PATH}/${column.column_id}.md`, md)
 

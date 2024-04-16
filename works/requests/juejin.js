@@ -25,8 +25,8 @@ export const commonPollingRequest = async (url, requestBody, cursorTimes = 1) =>
   const resList = []
   let i = 0
   let isOver = false
-  console.log("循环请求开始~");
-  console.log("请求地址：", url);
+  console.log("循环请求开始~")
+  console.log("请求地址：", url)
   while (!isOver) {
     // 专栏文章参数、专栏列表不需要*10; 个人文章需要*10
     requestBody.cursor = String(i * cursorTimes)
@@ -46,7 +46,7 @@ export const commonPollingRequest = async (url, requestBody, cursorTimes = 1) =>
     }
 
     if (res.data.err_no !== 0 || !res.data.data || !res.data.data.length) {
-      console.log("循环请求结束~");
+      console.log("循环请求结束~")
       break
     }
 

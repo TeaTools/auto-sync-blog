@@ -35,7 +35,9 @@ const NAV_LINKS = {
 }
 
 const processNavBar = (usedNav = [], userId, annualList) => {
-  const nav = []
+  // 默认具有概览页
+  const nav = [NAV_LINKS["overview"]]
+
   for (const usedNavElement of usedNav) {
     const navLink = NAV_LINKS[usedNavElement]
     if (usedNavElement === "annual") {
@@ -86,10 +88,10 @@ const processPressHead = (blog) => {
 export const processVitePressConfig = async (annualList = []) => {
   const { press, blog, juejin } = configurations
 
-  const { yearCollection} = await getArticlesAndColumnsMap()
+  const { yearCollection } = await getArticlesAndColumnsMap()
 
   for (const [year] of yearCollection) {
-    annualList.push({ text: `${year}`, link: `/years/${year}`})
+    annualList.push({ text: `${year}`, link: `/years/${year}` })
   }
 
   const replacer = (key) => {

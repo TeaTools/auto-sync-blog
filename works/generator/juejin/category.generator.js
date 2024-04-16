@@ -11,7 +11,6 @@ export const processCategoriesOverview = async () => {
   let categoryMD = `# 我的分类`
 
   for (const [category_id, categoryColl] of categoryCollection) {
-
     const { articles, count, info } = categoryColl
 
     categoryMD += `\n\n## ${info.category_name}`
@@ -35,9 +34,10 @@ export const processCategoryDetail = async (categoryColl, articles) => {
 
   md += `\n## 文章列表\n\n`
 
-  articles && articles.forEach(article => {
-    md += `\n${article.formatInfo.mdString}`
-  })
+  articles &&
+    articles.forEach((article) => {
+      md += `\n${article.formatInfo.mdString}`
+    })
 
   await writeFileSync(`${CATEGORIES_FILE_PATH}/${categoryColl.info.category_id}.md`, md)
 

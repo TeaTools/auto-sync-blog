@@ -11,7 +11,6 @@ export const processTagsOverview = async () => {
   let tagMD = `# 我的标签`
 
   for (const [tag_id, tagColl] of tagCollection) {
-
     const { articles, count, info } = tagColl
 
     tagMD += `\n\n## ${info.tag_name}`
@@ -35,9 +34,10 @@ export const processTagDetail = async (tagColl, articles) => {
 
   md += `\n## 文章列表\n\n`
 
-  articles && articles.forEach(article => {
-    md += `\n${article.formatInfo.mdString}`
-  })
+  articles &&
+    articles.forEach((article) => {
+      md += `\n${article.formatInfo.mdString}`
+    })
 
   await writeFileSync(`${TAGS_FILE_PATH}/${tagColl.info.tag_id}.md`, md)
 
