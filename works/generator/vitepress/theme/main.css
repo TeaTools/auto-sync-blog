@@ -223,6 +223,15 @@ kbd {
 .vp-doc a:hover {
   text-decoration: underline;
 }
+.vp-doc strong,
+.vp-doc blockquote,
+.vp-doc a,
+.vp-doc span,
+.vp-doc p,
+.vp-doc button,
+.vp-doc blockquote > p {
+  font-size: 0.875rem;
+}
 
 .VPTeamMembers .avatar {
   border-radius: 6px;
