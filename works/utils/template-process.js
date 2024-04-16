@@ -9,7 +9,7 @@ export function replaceKeywords(str, callback) {
   const matches = str.match(pattern)
 
   if (matches) {
-    const processedMatches = matches.map((match) => callback(match.replace(/{{|}}/g, '').trim()))
+    const processedMatches = matches.map((match) => callback(match.replace(/{{|}}/g, "").trim()))
 
     return str.replace(pattern, () => processedMatches.shift())
   }

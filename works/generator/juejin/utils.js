@@ -19,7 +19,7 @@ export const getArticleInfo = (article) => {
 
   const dateMap = dateFormatter(parseInt(ctime + "000"))
 
-  const articleInfo =  {
+  const articleInfo = {
     cover_image,
     article_id,
     title,
@@ -56,7 +56,7 @@ export function article2MD(articleBean, useList = true) {
   return txt
 }
 
-export function overviewTableMD(yearCollMap = new Map, yearMonthCollMap, year) {
+export function overviewTableMD(yearCollMap = new Map(), yearMonthCollMap, year) {
   let tableMD = `
 | 年份 | 总记 | 1月 | 2月| 3月 | 4月 | 5月 | 6月 | 7月 | 8月 | 9月 | 10月 | 11月 | 12月 |
 | - | - | - | - | - | - | - | - | - | - | - | - | - | - |
@@ -67,19 +67,19 @@ export function overviewTableMD(yearCollMap = new Map, yearMonthCollMap, year) {
       .map((key) => {
         if (key === "year") return year
         if (key === "count") return yearCollMap.get(year).count || 0
-        return yearMonthCollMap.get(`${year}${key}`) || '-'
+        return yearMonthCollMap.get(`${year}${key}`) || "-"
       })
       .join("|")}|`
     return tableMD + tableRow
   }
 
-  let tableRows = ''
+  let tableRows = ""
   yearCollMap.forEach((yearColl, k) => {
     tableRows += `|${columns
       .map((key) => {
         if (key === "year") return k
         if (key === "count") return yearCollMap.get(k).count || 0
-        return yearMonthCollMap.get(`${k}${key}`) || '-'
+        return yearMonthCollMap.get(`${k}${key}`) || "-"
       })
       .join("|")}|\n`
   })

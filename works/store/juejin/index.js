@@ -30,7 +30,7 @@ export const setArticles = async (newArticles = [], useSort = false) => {
     yearColl.count += 1
     yearColl.articles.push(article)
 
-    const {category, tags} = article
+    const { category, tags } = article
 
     if (!categoryCollection.get(category.category_id)) {
       categoryCollection.set(category.category_id, { info: category, count: 0, articles: [] })

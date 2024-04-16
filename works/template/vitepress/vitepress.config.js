@@ -1,5 +1,5 @@
 // vitepress 配置文件模板
-export const vitePressConfigJs =  `import { defineConfig } from "vitepress"
+export const vitePressConfigJs = `import { defineConfig } from "vitepress"
 
 export default defineConfig({
   title: "{{ name }}",
