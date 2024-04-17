@@ -24,6 +24,10 @@ const NAV_LINKS = {
     text: "我的标签",
     link: "/tags/index",
   },
+  ranking: {
+    text: "数据排行榜",
+    link: "/ranking/index",
+  },
   annual: {
     text: "年度统计",
     items: [],
