@@ -1,1 +1,0 @@
-import{_ as e,c as o,o as a,ag as r}from"./chunks/framework.ekniyEEX.js";const k=JSON.parse('{"title":"2023 年度概览","description":"","frontmatter":{},"headers":[],"relativePath":"years/2023.md","filePath":"years/2023.md"}'),t={name:"years/2023.md"},p=r("",929),c=[p];function d(n,l,i,s,h,u){return a(),o("div",null,c)}const q=e(t,[["render",d]]);export{k as __pageData,q as default};
