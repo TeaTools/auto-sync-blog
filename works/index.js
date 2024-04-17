@@ -2,6 +2,7 @@ import configurations from "../configurations.js"
 import {
   processCategoriesOverview,
   processColumnsOverview,
+  processRankingList,
   processTagsOverview,
   processVitePressConfig,
   processVitePressTheme,
@@ -23,6 +24,8 @@ const navProcessMap = {
 for (const navKey of press.nav) {
   navProcessMap[navKey] && (await navProcessMap[navKey]())
 }
+
+await processRankingList()
 
 // 生成 vite press 配置
 await processVitePressConfig()
