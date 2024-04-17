@@ -9,16 +9,17 @@ const sortArray = (arr, key) => {
   return copyArr.sort((a, b) => b.formatInfo[key] - a.formatInfo[key]).slice(0, 10)
 }
 const markerMap = {
-  1: "🥇",
-  2: "🥈",
-  3: "🥉",
+  0: "<font size=10>🥇</font>&ensp; ",
+  1: "<font size=10>🥈</font>&ensp; ",
+  2: "<font size=10>🥉</font>&ensp; ",
+  x: (idx) => `<font size=6>${idx + 1}.</font>&ensp; `,
 }
 const processTopArticles = (articles) => {
   return articles
     .map((i, idx) => {
-      return insertString(i.formatInfo.mdString, 7, markerMap[idx + 1] || `${idx + 1}. `)
+      return insertString(i.formatInfo.mdString, 7, markerMap[idx] || markerMap.x(idx))
     })
-    .join("\n")
+    .join("\n\n")
 }
 
 const template = (a, b, c, d) => `---
