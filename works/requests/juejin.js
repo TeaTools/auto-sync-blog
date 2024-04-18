@@ -5,13 +5,6 @@ const getArticleParams = (user_id) => ({
   sort_type: 2,
   user_id, // 用户id
 })
-const getColumnsParams = (column_id) => {
-  return {
-    column_id, // 专栏id
-    limit: 20, // 页大小
-    sort: 2, // 排序（1最早 2最新）
-  }
-}
 const getColumnsListParams = (user_id) => {
   return {
     audit_status: 2, // 审核状态（2为审核通过
@@ -65,8 +58,4 @@ export const getUserArticles = async (userId) => {
 // 获取用户所有专栏
 export const getUserColumns = async (userId) => {
   return await commonPollingRequest(COLUMN_LIST_API, getColumnsListParams(userId))
-}
-// 获取指定专栏所有文章
-export const getColumnArticles = async (columnId) => {
-  return await commonPollingRequest(COLUMN_API, getColumnsParams(columnId))
 }

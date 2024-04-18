@@ -12,6 +12,8 @@ let tagCollection = new Map()
 export const setArticles = async (newArticles = [], useSort = false) => {
   yearCollection.clear()
   yearMonthCollection.clear()
+  categoryCollection.clear()
+  tagCollection.clear()
 
   newArticles.forEach((article) => {
     const formatInfo = getArticleInfo(article)
