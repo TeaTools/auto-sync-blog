@@ -20,12 +20,11 @@ const navProcessMap = {
   category: processCategoriesOverview,
   tag: processTagsOverview,
   annual: processYearsPage,
+  ranking: processRankingList,
 }
 for (const navKey of press.nav) {
   navProcessMap[navKey] && (await navProcessMap[navKey]())
 }
-
-await processRankingList()
 
 // 生成 vite press 配置
 await processVitePressConfig()
