@@ -94,7 +94,12 @@ export const processVitePressConfig = async (annualList = []) => {
 
   const { yearCollection } = await getArticlesAndColumnsMap()
 
+  let years = []
   for (const [year] of yearCollection) {
+    years.push(year)
+  }
+  years = years.sort((a, b) => b - a)
+  for (const year of years) {
     annualList.push({ text: `${year}`, link: `/years/${year}` })
   }
 

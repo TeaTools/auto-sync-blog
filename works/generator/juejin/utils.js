@@ -77,7 +77,15 @@ export function overviewTableMD(yearCollMap = new Map(), yearMonthCollMap, year)
   }
 
   let tableRows = ""
+  let keys = []
+
   yearCollMap.forEach((yearColl, k) => {
+    keys.push(k)
+  })
+
+  keys = keys.sort((a, b) => b - a)
+
+  for (const k of keys) {
     tableRows += `|${columns
       .map((key) => {
         if (key === "year") return k
@@ -85,7 +93,7 @@ export function overviewTableMD(yearCollMap = new Map(), yearMonthCollMap, year)
         return yearMonthCollMap.get(`${k}${key}`) || "-"
       })
       .join("|")}|\n`
-  })
+  }
 
   return tableMD + tableRows
 }
