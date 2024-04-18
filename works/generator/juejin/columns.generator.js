@@ -14,8 +14,9 @@ export const processColumnsOverview = async () => {
     const { articles, columnInfo } = column
 
     columnMd += `\n\n## ${columnInfo.column_version.title}`
-    columnMd += `\n\n> · ${columnInfo.column.article_cnt} 文章 · ${columnInfo.column.follow_cnt} 订阅 ·`
-    columnMd += `\n> [进入专栏](/columns/${columnId})`
+    columnMd += `\n\n> ${columnInfo.column_version.content}`
+    columnMd += `\n>\n> 📊 **${columnInfo.column.article_cnt} 文章 · ${columnInfo.column.follow_cnt} 订阅**`
+    columnMd += `&emsp;[进入专栏](/columns/${columnId})`
 
     await processColumnDetail(columnInfo, articles)
   }
@@ -28,9 +29,13 @@ export const processColumnsOverview = async () => {
 export const processColumnDetail = async (column, articles) => {
   let md = `# ${column.column_version.title}`
 
+  md += `\n## 内容介绍\n\n`
+
+  md += `\n\n::: tip\n ${column.column_version.content}\n:::`
+
   md += `\n## 数据统计\n\n`
 
-  md += `\n\n· ${column.column.article_cnt} 文章 · ${column.column.follow_cnt} 订阅 ·`
+  md += `\n\n**${column.column.article_cnt} 文章 · ${column.column.follow_cnt} 订阅**`
 
   md += `\n## 文章列表\n\n`
 
