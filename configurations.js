@@ -3,7 +3,7 @@ export default {
   blog: {
     title: "MiyueFE's blog",
     description: "专注于发掘站内优质创作者和优质内容",
-    logo: "https://p26-passport.byteacctimg.com/img/user-avatar/afcc0b5364cba06f7814368d1f44fc11~130x130.awebp",
+    logo: "https://miyuefe.cn/assets/images/logo.svg",
     siteName: "tea.juejindev.com",
     head: [],
     keywords: ["前端", "后端", "移动端", "每日掘金", "酱酱的下午茶", "掘金", "掘金酱"],
