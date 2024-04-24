@@ -11,3 +11,5 @@ export const COLUMN_API = API + "content_api/v1/column/articles_cursor"
 export const COLUMN_LIST_API = API + "content_api/v1/column/self_center_list"
 // 单个专栏详情
 export const COLUMN_INFO_API = API + "content_api/v1/column/detail"
+// 单个专栏详情
+export const RECENT_ARTICLE_API = API + "recommend_api/v1/article/recommend_cate_feed"

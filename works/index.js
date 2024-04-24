@@ -8,6 +8,7 @@ import {
   processVitePressTheme,
 } from "./generator/index.js"
 import { processVitePressIndexMD, processOverviewMD, processYearsPage } from "./generator/index.js"
+import { processRecentTopList } from "./generator/juejin/recent-top.md.generator..js"
 
 // 注意生成顺序
 await processVitePressIndexMD()
@@ -21,6 +22,7 @@ const navProcessMap = {
   tag: processTagsOverview,
   annual: processYearsPage,
   ranking: processRankingList,
+  recent: processRecentTopList,
 }
 for (const navKey of press.nav) {
   navProcessMap[navKey] && (await navProcessMap[navKey]())
