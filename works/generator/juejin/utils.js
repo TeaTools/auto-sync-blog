@@ -1,5 +1,5 @@
 import dateFormatter from "../../utils/date-formatter.js"
-import { JUEJIN_POST_URL } from "../../website/juejin.js"
+import { JUEJIN_POST_URL, JUEJIN_USER_URL } from "../../website/juejin.js"
 
 export const getArticleInfo = (article) => {
   const {
@@ -15,6 +15,7 @@ export const getArticleInfo = (article) => {
       collect_count,
     },
     tags = [],
+    author_user_info: { user_name, user_id, company, job_title },
   } = article
 
   const dateMap = dateFormatter(parseInt(ctime + "000"))
@@ -31,6 +32,11 @@ export const getArticleInfo = (article) => {
     digg_count,
     comment_count,
     collect_count,
+    user_name,
+    user_id,
+    company,
+    job_title,
+    authorUrl: JUEJIN_USER_URL + user_id, // 作者
     tags: tags.map((t) => t.tag_name),
   }
 
