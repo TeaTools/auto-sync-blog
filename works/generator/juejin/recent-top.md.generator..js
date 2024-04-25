@@ -19,7 +19,7 @@ const timeRange = 3
 const getArticlePriority = async (article) => {
   const { article_info } = article
 
-  const { collect_count, comment_count, digg_count, view_count } = article_info
+  const { collect_count, comment_count, digg_count, view_count, rank_index } = article_info
 
   // const user_id = article_info.user_id
   // let userInfo = userInfoMap.get(user_id)
@@ -31,13 +31,13 @@ const getArticlePriority = async (article) => {
   //
   // const { follower_count, level, power, got_digg_count } = userInfo
 
-  return (
-    collect_count * 10 + comment_count * 10 + digg_count * 5 + view_count / 5
-    // follower_count * 8 +
-    // level * 2 +
-    // power +
-    // got_digg_count * 2
-  )
+  const totalCount = collect_count * 10 + comment_count * 10 + digg_count * 5 + view_count / 5
+  // follower_count * 8 +
+  // level * 2 +
+  // power +
+  // got_digg_count * 2
+
+  return totalCount * Math.ceil(rank_index)
 }
 
 const markerMap = {
