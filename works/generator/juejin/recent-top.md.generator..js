@@ -50,9 +50,10 @@ const markerMap = {
 const processTopArticles = (articles) => {
   return articles
     .map((i, idx) => {
-      console.log(i.priority)
       const info = getArticleInfo(i)
-      return insertString(info.mdString, 7, markerMap[idx] || markerMap.x(idx))
+      let md = insertString(info.mdString, 7, markerMap[idx] || markerMap.x(idx))
+      md += `\n\n✒ [${info.user_name}](${info.authorUrl})&emsp;${info.job_title} @ ${info.company}`
+      return md
     })
     .join("\n\n")
 }
