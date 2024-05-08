@@ -1,6 +1,6 @@
 import { getUserArticles, getUserColumns } from "../../requests/juejin.js"
-import configurations from "../../../configurations.js"
 import { getArticleInfo } from "../../generator/juejin/utils.js"
+import { getGlobalConfig } from "../configuration/index.js"
 
 let articles = null
 let columns = null
@@ -63,6 +63,8 @@ export const setArticles = async (newArticles = [], useSort = false) => {
 }
 export const getArticles = async () => {
   if (!articles) {
+    const configurations = await getGlobalConfig()
+
     const newArticles = await getUserArticles(configurations.juejin.userId)
     await setArticles(newArticles, true)
   }
@@ -74,6 +76,8 @@ export const setColumns = async (newColumns) => {
 }
 export const getColumns = async () => {
   if (!columns) {
+    const configurations = await getGlobalConfig()
+
     await setColumns(getUserColumns(configurations.juejin.userId))
   }
   return columns
