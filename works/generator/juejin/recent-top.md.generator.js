@@ -1,12 +1,12 @@
 import { mkdirp } from "mkdirp"
 import { RECENT_TOP_FILE_PATH } from "../../../build/config.base.js"
 import { writeFileSync } from "fs"
-import { getRecentArticles, getUserInfo } from "../../requests/juejin.js"
-import configurations from "../../../configurations.js"
+import { getRecentArticles } from "../../requests/juejin.js"
 import { insertString } from "../../utils/common.js"
 import { getArticleInfo } from "./utils.js"
+import { getGlobalConfig } from "../../store/configuration/index.js"
 
-const userInfoMap = new Map()
+// const userInfoMap = new Map()
 
 // 近期热门
 
@@ -61,6 +61,8 @@ const processTopArticles = (articles) => {
 export const processRecentTopList = async () => {
   try {
     await mkdirp(RECENT_TOP_FILE_PATH)
+
+    const configurations = await getGlobalConfig()
 
     const articles = await getRecentArticles(configurations.juejin.userId, timeRange)
 

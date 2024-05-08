@@ -1,9 +1,9 @@
 import { replaceKeywords } from "../../utils/template-process.js"
 import { homeTemplate, actionTemplate, featureTemplate, teamTemplate } from "../../template/index.js"
-import configurations from "../../../configurations.js"
 import { mkdirp } from "mkdirp"
 import { DOCS_FILE_PATH } from "../../../build/config.base.js"
 import { writeFileSync } from "fs"
+import { getGlobalConfig } from "../../store/configuration/index.js"
 
 const homeIcon =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">' +
@@ -33,6 +33,8 @@ const processFeature = (feature) => {
 }
 
 export const processVitePressIndexMD = async () => {
+  const configurations = await getGlobalConfig()
+
   const { press, blog } = configurations
 
   const replacer = (key) => {
