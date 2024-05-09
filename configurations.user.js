@@ -39,6 +39,5 @@ export default {
   // 掘金
   juejin: {
     userId: "747323639208391",
-    columnsIds: [],
   },
 }
