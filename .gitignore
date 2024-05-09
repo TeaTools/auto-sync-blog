@@ -116,4 +116,4 @@ dist
 .docs
 .vitepress
 
-#*.user.js
+*.user.js
