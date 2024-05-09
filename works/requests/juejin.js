@@ -1,17 +1,10 @@
-import { post } from "../utils/http-requester.js"
-import { ARTICLE_API, COLUMN_API, COLUMN_LIST_API } from "../apis/juejin.js"
+import { get, post } from "../utils/http-requester.js"
+import { ARTICLE_API, COLUMN_LIST_API, RECENT_ARTICLE_API, USER_API } from "../apis/juejin.js"
 
 const getArticleParams = (user_id) => ({
   sort_type: 2,
   user_id, // 用户id
 })
-const getColumnsParams = (column_id) => {
-  return {
-    column_id, // 专栏id
-    limit: 20, // 页大小
-    sort: 2, // 排序（1最早 2最新）
-  }
-}
 const getColumnsListParams = (user_id) => {
   return {
     audit_status: 2, // 审核状态（2为审核通过
@@ -19,54 +12,106 @@ const getColumnsListParams = (user_id) => {
     limit: 10,
   }
 }
+const getRecentArticleParams = (user_id) => {
+  return {
+    cate_id: "6809637767543259144",
+    id_type: 2,
+    limit: 20,
+    sort_type: 300,
+  }
+}
 
+// 通用终止轮询判断
+export const commonPollingOver = (responseData) => {
+  return responseData.err_no !== 0 || !responseData.data || !responseData.data.length
+}
 // 通用轮询请求
-export const commonPollingRequest = async (url, requestBody, cursorTimes = 1) => {
+export const commonPollingRequest = async (url, requestBodyGenerator, overPolling = commonPollingOver) => {
   const resList = []
-  let i = 0
-  let isOver = false
+  let idx = 0
+  let badCount = 0
+  let lastResponse = null
   console.log("循环请求开始~")
   console.log("请求地址：", url)
-  while (!isOver) {
-    // 专栏文章参数、专栏列表不需要*10; 个人文章需要*10
-    requestBody.cursor = String(i * cursorTimes)
+  while (true) {
+    const requestBody = requestBodyGenerator(idx, lastResponse)
 
     let res = await post(url, requestBody)
-    let isBadWebCount = 0
 
     // 有可能网络异常，数据请求不到，那就重复5次
-    while ((!res || !res.data) && isBadWebCount < 5) {
+    while ((!res || !res.data) && badCount < 5) {
       res = await post(url, requestBody)
-      isBadWebCount++
+      badCount++
     }
 
     // 五次之后还是有问题就抛出异常（事不过五）
-    if (isBadWebCount >= 5) {
-      throw new Error("请求故障，请重试！")
+    if (badCount >= 5) {
+      throw new Error(url + " 请求故障，请重试！")
     }
 
-    if (res.data.err_no !== 0 || !res.data.data || !res.data.data.length) {
+    if (overPolling(res.data)) {
       console.log("循环请求结束~")
       break
     }
-
     resList.push(...res.data.data)
 
-    i++
-    // await sleep()
+    lastResponse = res
+    badCount = 0
+
+    idx++
   }
   return resList
 }
 
 // 获取用户所有文章
 export const getUserArticles = async (userId) => {
-  return await commonPollingRequest(ARTICLE_API, getArticleParams(userId), 10)
+  const requestBodyGenerator = (idx) => {
+    return {
+      ...getArticleParams(userId),
+      cursor: String(idx * 10),
+    }
+  }
+  return await commonPollingRequest(ARTICLE_API, requestBodyGenerator)
 }
 // 获取用户所有专栏
 export const getUserColumns = async (userId) => {
-  return await commonPollingRequest(COLUMN_LIST_API, getColumnsListParams(userId))
+  const requestBodyGenerator = (idx) => {
+    return {
+      ...getColumnsListParams(userId),
+      cursor: idx.toString(),
+    }
+  }
+  return await commonPollingRequest(COLUMN_LIST_API, requestBodyGenerator)
 }
-// 获取指定专栏所有文章
-export const getColumnArticles = async (columnId) => {
-  return await commonPollingRequest(COLUMN_API, getColumnsParams(columnId))
+
+// 近期热门
+export const getRecentArticles = async (user_id, days = 3) => {
+  const now = Date.now()
+  const timeStep = days * 24 * 3600 * 1000 // 近三天
+
+  const requestBodyGenerator = (idx, lastResponse) => {
+    return {
+      ...getRecentArticleParams(user_id),
+      cursor: lastResponse ? lastResponse.data.cursor : "0",
+    }
+  }
+  const pollingOver = (responseData) => {
+    if (commonPollingOver(responseData)) return true
+
+    const list = responseData.data
+    const length = list.length
+
+    return list.filter((i) => now - Number(i.article_info.ctime + "000") > timeStep).length >= length * 0.8
+  }
+
+  const allArticles = await commonPollingRequest(RECENT_ARTICLE_API, requestBodyGenerator, pollingOver)
+
+  return allArticles.filter((i) => now - Number(i.article_info.ctime + "000") < timeStep)
+}
+
+// 指定用户个人信息
+export const getUserInfo = async (user_id) => {
+  const res = await get(USER_API, { user_id })
+
+  return res.data.data
 }

@@ -1,5 +1,5 @@
 import dateFormatter from "../../utils/date-formatter.js"
-import { JUEJIN_POST_URL } from "../../website/juejin.js"
+import { JUEJIN_POST_URL, JUEJIN_USER_URL } from "../../website/juejin.js"
 
 export const getArticleInfo = (article) => {
   const {
@@ -15,6 +15,7 @@ export const getArticleInfo = (article) => {
       collect_count,
     },
     tags = [],
+    author_user_info: { user_name, user_id, company, job_title },
   } = article
 
   const dateMap = dateFormatter(parseInt(ctime + "000"))
@@ -31,6 +32,11 @@ export const getArticleInfo = (article) => {
     digg_count,
     comment_count,
     collect_count,
+    user_name,
+    user_id,
+    company,
+    job_title,
+    authorUrl: JUEJIN_USER_URL + user_id, // 作者
     tags: tags.map((t) => t.tag_name),
   }
 
@@ -47,7 +53,7 @@ export function article2MD(articleBean, useList = true) {
   // let txt = `\r\n${useList ? "-" : "###"} [${title}](${postUrl})`
   let txt = `\r\r\n${useList ? "-" : "###"} ${title}`
 
-  txt += `\n\r> ${brief_content}...`
+  txt += `\n\r> ${brief_content.replaceAll("#", "")}...`
   txt += `\n>\n> [前往掘金](${postUrl})`
   txt += `\n\n📊 **${view_count} 阅读 · ${digg_count} 点赞 · ${comment_count} 评论 · ${collect_count} 收藏**`
   txt += `\n\n📅 ${dateMap.YMD}`
@@ -77,7 +83,15 @@ export function overviewTableMD(yearCollMap = new Map(), yearMonthCollMap, year)
   }
 
   let tableRows = ""
+  let keys = []
+
   yearCollMap.forEach((yearColl, k) => {
+    keys.push(k)
+  })
+
+  keys = keys.sort((a, b) => b - a)
+
+  for (const k of keys) {
     tableRows += `|${columns
       .map((key) => {
         if (key === "year") return k
@@ -85,7 +99,7 @@ export function overviewTableMD(yearCollMap = new Map(), yearMonthCollMap, year)
         return yearMonthCollMap.get(`${k}${key}`) || "-"
       })
       .join("|")}|\n`
-  })
+  }
 
   return tableMD + tableRows
 }
