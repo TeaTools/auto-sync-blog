@@ -27,7 +27,7 @@ export default {
     ],
 
     // column：专栏；category：文章分类；tag：标签；annual：年度分类；follow：跳转掘金主页
-    nav: ["column", "category", "ranking", "annual", "follow"],
+    nav: ["column", "category", "ranking", "annual", "recent", "follow"],
 
     socialLinks: {
       github: "https://github.com/TeaTools/auto-sync-blog",
