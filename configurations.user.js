@@ -1,9 +1,9 @@
 export default {
   // blog 基础配置
   blog: {
-    title: "MiyueFE's blog",
+    title: "LinDaiDai_霖呆呆's blog",
     description: "专注于 Web 前端的菜鸟开发",
-    logo: "https://miyuefe.cn/assets/images/logo.svg",
+    logo: "https://p3-passport.byteacctimg.com/img/user-avatar/e2e5305d72f7b8df043774fed23ad6f6~120x120.awebp",
     siteName: "miyuefe.cn",
     head: [],
     keywords: ["前端", "Vue", "JavaScript", "TypeScript", "HTML", "CSS", "MiyueFE"],
@@ -12,7 +12,7 @@ export default {
 
   // vite press 构建配置
   press: {
-    name: "MiyueFE",
+    name: "LinDaiDai_霖呆呆",
     text: "专注于 Web 前端的菜鸟开发",
     tagline: "",
     image: "https://vitepress.dev/vitepress-logo-large.webp",
@@ -38,6 +38,6 @@ export default {
 
   // 掘金
   juejin: {
-    userId: "747323639208391",
+    userId: "360295513463912",
   },
 }
