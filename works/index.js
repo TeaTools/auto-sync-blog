@@ -1,4 +1,3 @@
-import configurations from "../configurations.js"
 import {
   processCategoriesOverview,
   processColumnsOverview,
@@ -9,13 +8,14 @@ import {
 } from "./generator/index.js"
 import { processVitePressIndexMD, processOverviewMD, processYearsPage } from "./generator/index.js"
 import { processRecentTopList } from "./generator/juejin/recent-top.md.generator.js"
+import { getGlobalConfig } from "./store/configuration/index.js"
 
 // 注意生成顺序
 await processVitePressIndexMD()
 
 await processOverviewMD()
 
-const { press } = configurations
+const { press } = await getGlobalConfig()
 const navProcessMap = {
   column: processColumnsOverview,
   category: processCategoriesOverview,
