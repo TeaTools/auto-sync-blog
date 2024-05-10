@@ -11,5 +11,8 @@ export const COLUMN_API = API + "content_api/v1/column/articles_cursor"
 export const COLUMN_LIST_API = API + "content_api/v1/column/self_center_list"
 // 单个专栏详情
 export const COLUMN_INFO_API = API + "content_api/v1/column/detail"
-// 单个专栏详情
+
+// 默认分类列表（前端、后端、移动端、人工智能、开发工具等分类）
+export const CATEGORY_LIST_API = API + "tag_api/v1/query_category_briefs"
+// 单个分类文章列表查询
 export const RECENT_ARTICLE_API = API + "recommend_api/v1/article/recommend_cate_feed"

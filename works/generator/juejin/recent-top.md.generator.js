@@ -1,10 +1,11 @@
 import { mkdirp } from "mkdirp"
-import { RECENT_TOP_FILE_PATH } from "../../../build/config.base.js"
 import { writeFileSync } from "fs"
-import { getRecentArticles } from "../../requests/juejin.js"
+import { RECENT_TOP_FILE_PATH } from "../../../build/config.base.js"
+import { getCategoryList, getRecentArticles } from "../../requests/juejin.js"
 import { insertString } from "../../utils/common.js"
 import { getArticleInfo } from "./utils.js"
 import { getGlobalConfig } from "../../store/configuration/index.js"
+import { markerMap } from "../../utils/template-process.js"
 
 // const userInfoMap = new Map()
 
@@ -14,6 +15,8 @@ import { getGlobalConfig } from "../../store/configuration/index.js"
 const topLength = 20
 // 前推天数
 const timeRange = 3
+// 排除分类
+const excludeCategory = ["开发工具", "代码人生", "阅读"]
 
 // 计算文章优先级
 const getArticlePriority = async (article) => {
@@ -40,45 +43,81 @@ const getArticlePriority = async (article) => {
   return totalCount * Math.ceil(rank_index)
 }
 
-const markerMap = {
-  0: "<font size=10>🥇</font>&ensp; ",
-  1: "<font size=10>🥈</font>&ensp; ",
-  2: "<font size=10>🥉</font>&ensp; ",
-  x: (idx) => `<font size=6>${idx + 1}.</font>&ensp; `,
+// 单个分类文章排行榜 md
+const processTopArticles = (articles) => {
+  return (
+    articles
+      .map((i, idx) => {
+        const info = getArticleInfo(i)
+        let md = insertString(info.mdString, 7, markerMap[idx] || markerMap.x(idx))
+        md += `\r\r✒ [${info.user_name}](${info.authorUrl}) &emsp; ${info.job_title}${info.company ? " @ " + info.company : ""}\r\r`
+        return md
+      })
+      .join("\r\r") + "\r"
+  )
 }
 
-const processTopArticles = (articles) => {
-  return articles
-    .map((i, idx) => {
-      const info = getArticleInfo(i)
-      let md = insertString(info.mdString, 7, markerMap[idx] || markerMap.x(idx))
-      md += `\n\n✒ [${info.user_name}](${info.authorUrl})&emsp;${info.job_title} @ ${info.company}`
-      return md
-    })
-    .join("\n\n")
+// 生成页面完整 md
+const recentTemplateGenerator = (categories, categoryArticlesMap) => {
+  return `---
+aside: false
+---
+<script setup>
+import { ref } from 'vue';
+
+const active = ref(0);
+</script>
+
+# 近期热门文章排行榜
+
+<div class="ranking-tabs">
+<div class="ranking-tabs_header">
+    ${categories.map((c, idx) => `
+<div :class="['ranking-tab-item', active === ${idx} ?'ranking-tab-item_active' : '']" @click="active = ${idx}">${c.category_name}</div>`).join("\r\r")}
+</div>
+  
+  ${categories
+    .map(
+      (c, idx) => `
+<div class="ranking-tabs_ranking-list" v-show="active === ${idx}">
+${processTopArticles(categoryArticlesMap.get(c.category_id) || [])}
+</div>`,
+    )
+    .join("\r\r")}
+</div>
+`
 }
+
+
+
+// ${processTopArticles(categoryArticlesMap.get(c.category_id) || [])}
 
 export const processRecentTopList = async () => {
   try {
     await mkdirp(RECENT_TOP_FILE_PATH)
 
-    const configurations = await getGlobalConfig()
+    const categoryArticlesMap = new Map()
+    const categories = await getCategoryList()
 
-    const articles = await getRecentArticles(configurations.juejin.userId, timeRange)
+    const filteredCategories = categories.filter((c) => !excludeCategory.includes(c.category_name))
 
-    for (const article of articles) {
-      article.priority = await getArticlePriority(article)
+    for (const filteredCategory of filteredCategories) {
+      const articles = await getRecentArticles(filteredCategory.category_id, timeRange)
+
+      for (const article of articles) {
+        article.priority = await getArticlePriority(article)
+      }
+
+      const sortedArticles = articles.sort((a, b) => b.priority - a.priority)
+
+      const topArticles = sortedArticles.slice(0, topLength)
+
+      categoryArticlesMap.set(filteredCategory.category_id, topArticles)
     }
 
-    const sortedArticles = articles.sort((a, b) => b.priority - a.priority)
+    const mdString = recentTemplateGenerator(filteredCategories, categoryArticlesMap)
 
-    const topArticles = sortedArticles.slice(0, topLength)
-
-    let md = `# 近期热门文章排行榜`
-
-    md += `\n\n${processTopArticles(topArticles)}`
-
-    await writeFileSync(`${RECENT_TOP_FILE_PATH}/index.md`, md)
+    await writeFileSync(`${RECENT_TOP_FILE_PATH}/index.md`, mdString)
 
     console.log("Ranking list 写入成功~")
   } catch (e) {
