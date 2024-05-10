@@ -2,8 +2,8 @@ import { getArticlesAndColumnsMap } from "../../store/index.js"
 import { mkdirp } from "mkdirp"
 import { RANKING_FILE_PATH } from "../../../build/config.base.js"
 import { writeFileSync } from "fs"
-import {processTopArticles} from "../../utils/template-process.js";
-import {sortArticleArray} from "../../utils/common.js";
+import { processTopArticles } from "../../utils/template-process.js"
+import { sortArticleArray } from "../../utils/common.js"
 
 const template = (a, b, c, d) => `---
 aside: false
