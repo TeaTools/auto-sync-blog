@@ -1,5 +1,5 @@
 import { get, post } from "../utils/http-requester.js"
-import { ARTICLE_API, COLUMN_LIST_API, RECENT_ARTICLE_API, USER_API } from "../apis/juejin.js"
+import {ARTICLE_API, COLUMN_LIST_API, RECENT_ARTICLE_API, CATEGORY_LIST_API, USER_API} from "../apis/juejin.js"
 
 const getArticleParams = (user_id) => ({
   sort_type: 2,
@@ -12,12 +12,12 @@ const getColumnsListParams = (user_id) => {
     limit: 10,
   }
 }
-const getRecentArticleParams = (user_id) => {
+const getRecentArticleParams = (cate_id) => {
   return {
-    cate_id: "6809637767543259144",
+    cate_id, // 类别 ID
     id_type: 2,
     limit: 20,
-    sort_type: 300,
+    sort_type: 300, // 默认最新排序
   }
 }
 
@@ -84,14 +84,20 @@ export const getUserColumns = async (userId) => {
   return await commonPollingRequest(COLUMN_LIST_API, requestBodyGenerator)
 }
 
-// 近期热门
-export const getRecentArticles = async (user_id, days = 3) => {
+// 掘金默认分类
+export const getCategoryList = async () => {
+  const res = await get(CATEGORY_LIST_API)
+
+  return res.data.data
+}
+// 近期热门文章
+export const getRecentArticles = async (cate_id, days = 3) => {
   const now = Date.now()
   const timeStep = days * 24 * 3600 * 1000 // 近三天
 
   const requestBodyGenerator = (idx, lastResponse) => {
     return {
-      ...getRecentArticleParams(user_id),
+      ...getRecentArticleParams(cate_id),
       cursor: lastResponse ? lastResponse.data.cursor : "0",
     }
   }
