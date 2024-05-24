@@ -16,3 +16,5 @@ export const TAGS_FILE_PATH = "docs/src/tags"
 export const YEARS_FILE_PATH = "docs/src/years"
 // 排行榜
 export const RANKING_FILE_PATH = "docs/src/ranking"
+// 最近热门
+export const RECENT_TOP_FILE_PATH = "docs/src/recent"

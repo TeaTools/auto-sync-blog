@@ -1,4 +1,3 @@
-import configurations from "../../../configurations.js"
 import { vitePressConfigJs } from "../../template/index.js"
 import { JUEJIN_USER_URL } from "../../website/juejin.js"
 import { replaceKeywords } from "../../utils/template-process.js"
@@ -6,6 +5,7 @@ import { writeFileSync, cpSync } from "fs"
 import { CONFIG_FILE_PATH, THEME_FILE_PATH, THEME_SET_FILE_PATH } from "../../../build/config.base.js"
 import { mkdirp } from "mkdirp"
 import { getArticlesAndColumnsMap } from "../../store/index.js"
+import { getGlobalConfig } from "../../store/configuration/index.js"
 
 const NAV_LINKS = {
   overview: {
@@ -27,6 +27,10 @@ const NAV_LINKS = {
   ranking: {
     text: "数据排行榜",
     link: "/ranking/index",
+  },
+  recent: {
+    text: "近期热门文章",
+    link: "/recent/index",
   },
   annual: {
     text: "年度统计",
@@ -90,11 +94,18 @@ const processPressHead = (blog) => {
 }
 
 export const processVitePressConfig = async (annualList = []) => {
+  const configurations = await getGlobalConfig()
+
   const { press, blog, juejin } = configurations
 
   const { yearCollection } = await getArticlesAndColumnsMap()
 
+  let years = []
   for (const [year] of yearCollection) {
+    years.push(year)
+  }
+  years = years.sort((a, b) => b - a)
+  for (const year of years) {
     annualList.push({ text: `${year}`, link: `/years/${year}` })
   }
 
