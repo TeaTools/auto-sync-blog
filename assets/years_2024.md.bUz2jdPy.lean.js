@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as t,ag as a}from"./chunks/framework.wwMuplKi.js";const g=JSON.parse('{"title":"2024 年度概览","description":"","frontmatter":{},"headers":[],"relativePath":"years/2024.md","filePath":"years/2024.md"}'),r={name:"years/2024.md"},n=a("",116),d=[n];function c(p,s,i,l,h,u){return t(),o("div",null,d)}const k=e(r,[["render",c]]);export{g as __pageData,k as default};
