@@ -118,6 +118,8 @@ export const getArticlesAndColumnsMap = async () => {
   const removeUnColumnArticle = (columnArticleList) => {
     if (!columnArticleList) return
     for (let idx = 0; idx < columnArticleList.length; idx++) {
+      if (!columnArticleList[idx]) continue
+
       const { article_id } = columnArticleList[idx]
       if (!article_id) continue
 
